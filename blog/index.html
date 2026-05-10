@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="ブログ | AI集客ドットコム" />
+  <meta property="og:description" content="AI集客・AIO・LLMO・MEO・GBP運用に関する最新情報をお届けするブログ。株式会社Gratitude運営。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ai-marketing-japan.jp/blog/" />
+  <meta property="og:image" content="https://ai-marketing-japan.jp/ai-search-google-trend-.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="AI集客ドットコム" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ai-marketing-japan.jp/ai-search-google-trend-.png" />
+  <title>ブログ | AI集客ドットコム</title>
+  <meta name="description" content="AI集客・AIO・LLMO・MEO・GBP運用代行に関する最新情報をお届けするブログ。株式会社Gratitudeが運営。" />
+  <link rel="canonical" href="https://ai-marketing-japan.jp/blog/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#0d1f3c;--navy2:#1a3260;--gold:#f59e0b;--gold-l:#fbbf24;
+      --blue:#2563eb;--purple:#7c3aed;--white:#ffffff;--off:#f8fafc;
+      --g100:#f1f5f9;--g200:#e2e8f0;--g500:#64748b;--text:#0f172a;
+      --r:16px;--sh:0 8px 32px rgba(13,31,60,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--text);background:#fff;line-height:1.75}
+    h1,h2,h3{font-family:"Shippori Mincho","Yu Mincho",serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1140px,calc(100% - 48px));margin:0 auto}
+    .sec{padding:72px 0}
+
+    /* HEADER */
+    .site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--g200);box-shadow:0 2px 16px rgba(0,0,0,.06)}
+    .hd-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+    .hd-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .hd-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;overflow:hidden}
+    .hd-logo-name{font-size:16px;font-weight:900;color:var(--navy);font-family:"Shippori Mincho",serif;line-height:1.2}
+    .hd-logo-sub{font-size:10px;color:var(--g500)}
+    .hd-nav{display:flex;align-items:center;gap:2px}
+    .hd-nav a{padding:7px 11px;font-size:13px;color:var(--g500);border-radius:8px;transition:.2s;white-space:nowrap}
+    .hd-nav a:hover,.hd-nav a.active{color:var(--navy);background:var(--g100)}
+    .hd-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;border-radius:14px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:.2s}
+    .btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;box-shadow:0 12px 28px rgba(245,158,11,.32)}
+    .btn-gold:hover{transform:translateY(-2px)}
+    .btn-sm{min-height:40px;padding:0 18px;font-size:13px;border-radius:10px}
+
+    /* PAGE HERO */
+    .page-hero{background:linear-gradient(135deg,#060f20 0%,#0d2044 50%,#091830 100%);color:#fff;padding:52px 0 44px}
+    .page-hero h1{font-size:clamp(28px,4vw,40px);font-weight:800;margin:10px 0 8px}
+    .page-hero p{font-size:15px;color:rgba(255,255,255,.72)}
+    .ey{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.06em}
+    .ey-w{background:rgba(255,255,255,.14);color:#dbeafe;border:1px solid rgba(255,255,255,.22)}
+
+    /* BLOG GRID */
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+    .blog-card{background:#fff;border:1px solid var(--g200);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);transition:.25s;display:flex;flex-direction:column}
+    .blog-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(13,31,60,.16)}
+    .blog-thumb{width:100%;height:200px;object-fit:cover;background:var(--g100)}
+    .blog-thumb-placeholder{width:100%;height:200px;background:linear-gradient(135deg,var(--g100),var(--g200));display:flex;align-items:center;justify-content:center;font-size:48px}
+    .blog-body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+    .blog-cat{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(37,99,235,.1);color:#1d4ed8;font-size:11px;font-weight:700;margin-bottom:10px}
+    .blog-body h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.5;flex:1}
+    .blog-date{font-size:12px;color:var(--g500);margin-top:12px}
+    .blog-loading{text-align:center;padding:60px;color:var(--g500);font-size:15px}
+    .blog-error{text-align:center;padding:60px;color:#dc2626;font-size:15px;background:rgba(220,38,38,.05);border-radius:var(--r);border:1px solid rgba(220,38,38,.1)}
+
+    /* PAGINATION */
+    .pagination{display:flex;justify-content:center;gap:8px;margin-top:48px}
+    .pagination button{padding:8px 16px;border-radius:8px;border:1px solid var(--g200);background:#fff;color:var(--navy);font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+    .pagination button.active,.pagination button:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+    /* FOOTER */
+    footer{background:var(--navy);padding:30px 0;text-align:center;color:rgba(255,255,255,.45);font-size:13px;margin-top:80px}
+    footer a{color:rgba(255,255,255,.5)}
+    footer a:hover{color:rgba(255,255,255,.8)}
+    .footer-nav{display:flex;justify-content:center;gap:24px;margin-bottom:12px;flex-wrap:wrap}
+    .footer-nav a{font-size:13px}
+
+    @media(max-width:960px){.blog-grid{grid-template-columns:repeat(2,1fr)}.hd-nav{display:none}}
+    @media(max-width:600px){.blog-grid{grid-template-columns:1fr}.hd-cta .btn-sm:first-child{display:none}}
+
+    /* ── モバイルナビ ── */
+    .mob-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+    .mob-ham span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+    .mob-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .mob-ham.open span:nth-child(2){opacity:0}
+    .mob-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mob-nav{position:fixed;top:61px;left:0;right:0;background:#fff;border-bottom:1px solid var(--g200);box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:99;display:none;flex-direction:column;padding:8px 0}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:14px 24px;font-size:15px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--g100);transition:.2s}
+    .mob-nav a:last-child{border-bottom:none}
+    .mob-nav a:hover,.mob-nav a.active{background:var(--g100);color:var(--blue)}
+    @media(max-width:960px){.hd-cta{display:none}.mob-ham{display:flex;margin-right:4px}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap hd-inner">
+    <a href="/" class="hd-logo">
+      <div class="hd-logo-icon"><img src="/images/logo-ai-llmo-aio-aeo-webmarketing-.png" alt="ロゴ" style="width:38px;height:38px;object-fit:contain;"></div>
+      <div>
+        <div class="hd-logo-name">AI集客ドットコム</div>
+        <div class="hd-logo-sub">by 株式会社Gratitude</div>
+      </div>
+    </a>
+    <nav class="hd-nav">
+      <a href="/">トップ</a>
+      <a href="/#services">サービス</a>
+      <a href="/#plans">料金プラン</a>
+      <a href="/blog/" class="active">ブログ</a>
+      <a href="/about/">会社概要</a>
+      <a href="/contact/">お問い合わせ</a>
+    </nav>
+    <div class="hd-cta">
+      <a class="btn btn-sm" href="mailto:gratitude00000000@gmail.com?subject=集客支援について相談したい" style="background:var(--off);border:1px solid var(--g200);color:var(--navy)">
+        ✉ メールで相談する
+      </a>
+      <a class="btn btn-gold btn-sm" href="tel:0989755682">📞 098-975-5682</a>
+    </div>
+    <button class="mob-ham" id="mobHam" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mob-nav" id="mobNav">
+  <a href="/">トップ</a>
+  <a href="/#services">サービス</a>
+  <a href="/#plans">料金プラン</a>
+  <a href="/blog/" class="active">ブログ</a>
+  <a href="/about/">会社概要</a>
+  <a href="/contact/">お問い合わせ</a>
+</nav>
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="wrap">
+    <span class="ey ey-w">AI集客ドットコム</span>
+    <h1>ブログ</h1>
+    <p>AI集客・AIO・LLMO・MEO・GBP運用に関する最新情報をお届けします。</p>
+  </div>
+</div>
+
+<!-- BLOG LIST -->
+<section class="sec">
+  <div class="wrap">
+    <div id="blogContainer" class="blog-loading">
+      <div style="font-size:32px;margin-bottom:12px">📝</div>
+      記事を読み込み中...
+    </div>
+    <div class="pagination" id="pagination" style="display:none"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-nav">
+      <a href="/">トップ</a>
+      <a href="/#services">サービス</a>
+      <a href="/#plans">料金プラン</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/about/">会社概要</a>
+      <a href="/contact/">お問い合わせ</a>
+    </div>
+    <p>© 株式会社Gratitude All Rights Reserved. | <a href="https://gratitude-japan.com">株式会社Gratitude 公式サイト</a></p>
+  </div>
+</footer>
+
+<script>
+  // ── microCMS ブログ取得 ──
+  const SERVICE_DOMAIN = "7y2xctaof8";
+  const API_KEY = "RPDsOCCOyqnFxFP2khE7cYzATnTjKOKMjed5";
+  const PER_PAGE = 9;
+  let currentOffset = 0;
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+  }
+
+  function renderBlogs(blogs) {
+    if (!blogs || blogs.length === 0) {
+      return `<div class="blog-error">📭 まだ記事がありません。</div>`;
+    }
+    return `<div class="blog-grid">${blogs.map(b => `
+      <a href="/blog/post.html?id=${b.id}" class="blog-card">
+        ${b.eyecatch
+          ? `<img class="blog-thumb" src="${b.eyecatch.url}" alt="${b.title}" loading="lazy">`
+          : `<div class="blog-thumb-placeholder">📝</div>`
+        }
+        <div class="blog-body">
+          ${b.category ? `<span class="blog-cat">${b.category.name}</span>` : ''}
+          <h3>${b.title}</h3>
+          <div class="blog-date">📅 ${formatDate(b.publishedAt)}</div>
+        </div>
+      </a>
+    `).join('')}</div>`;
+  }
+
+  async function loadBlogs(offset = 0) {
+    const container = document.getElementById('blogContainer');
+    container.innerHTML = '<div class="blog-loading"><div style="font-size:32px;margin-bottom:12px">📝</div>記事を読み込み中...</div>';
+    try {
+      const res = await fetch(
+        `https://${SERVICE_DOMAIN}.microcms.io/api/v1/blogs?orders=-publishedAt&limit=${PER_PAGE}&offset=${offset}`,
+        { headers: { 'X-MICROCMS-API-KEY': API_KEY } }
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      container.innerHTML = renderBlogs(data.contents);
+
+      // pagination
+      const total = data.totalCount;
+      const pag = document.getElementById('pagination');
+      if (total > PER_PAGE) {
+        pag.style.display = 'flex';
+        const pages = Math.ceil(total / PER_PAGE);
+        const currentPage = Math.floor(offset / PER_PAGE);
+        pag.innerHTML = Array.from({length: pages}, (_, i) =>
+          `<button class="${i === currentPage ? 'active' : ''}" onclick="loadBlogs(${i * PER_PAGE})">${i+1}</button>`
+        ).join('');
+      } else {
+        pag.style.display = 'none';
+      }
+    } catch(e) {
+      container.innerHTML = `<div class="blog-error">⚠️ 記事の読み込みに失敗しました。<br><small>${e.message}</small></div>`;
+    }
+  }
+
+  loadBlogs();
+
+  // ── モバイルナビ ──
+  const mobHam = document.getElementById('mobHam');
+  const mobNav = document.getElementById('mobNav');
+  if(mobHam && mobNav){
+    mobHam.addEventListener('click', () => {
+      mobHam.classList.toggle('open');
+      mobNav.classList.toggle('open');
+    });
+    mobNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobHam.classList.remove('open');
+      mobNav.classList.remove('open');
+    }));
+  }
+</script>
+</body>
+</html>
