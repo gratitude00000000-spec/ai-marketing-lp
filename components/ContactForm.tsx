@@ -38,7 +38,10 @@ export function ContactForm() {
 
     setSubmitting(true);
     try {
-      const res = await fetch('/', {
+      // POST 先は静的HTML（public/__forms.html）。Next.js の SSR 関数が
+      // ルートの POST を横取りすると Netlify Forms に届かないため、
+      // Netlify のフォームハンドラが確実に処理する静的パスへ送る。
+      const res = await fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode(payload),
@@ -59,13 +62,15 @@ export function ContactForm() {
       <form
         name={FORM_NAME}
         method="POST"
-        action="/thanks/"
+        action="/__forms.html"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
         style={{ display: 'flex', flexDirection: 'column', gap: 18 }}
       >
         <input type="hidden" name="form-name" value={FORM_NAME} />
+        {/* JS無効時のリダイレクト先（Netlify Forms が honor する） */}
+        <input type="hidden" name="redirect" value="/thanks/" />
         <p hidden>
           <label>
             Do not fill this out: <input name="bot-field" />
