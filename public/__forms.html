@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8" /><title>Netlify Forms 検出用</title></head>
+<body>
+  <!--
+    このファイルは Netlify のビルド時フォーム検出専用。
+    実際の送信は React 側の components/ContactForm.tsx が行う。
+    フィールドはフォームと 1:1 で一致させること。
+  -->
+  <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact" />
+    <input name="bot-field" />
+    <input type="radio" name="purpose" value="ai_interest" />
+    <input type="radio" name="purpose" value="comparison" />
+    <input type="radio" name="purpose" value="consultation" />
+    <input type="text" name="name" />
+    <input type="text" name="company" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>

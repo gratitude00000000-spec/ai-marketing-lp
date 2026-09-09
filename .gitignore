@@ -1,9 +1,39 @@
-# OS
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
 .DS_Store
 **/.DS_Store
-# tooling
-.netlify/
-.vercel/
-node_modules/
-# editor / local
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env — 実キーは絶対にコミットしない
+.env
+.env.local
+.env*.local
+
+# deploy tooling
+.vercel
+.netlify
+
+# editor
 .claude/
+.idea/
+.vscode/
+
+# typescript
+*.tsbuildinfo
