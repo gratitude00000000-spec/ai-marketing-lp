@@ -7,6 +7,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // 本番の既存URL（/about/ 等・末尾スラッシュあり）をそのまま維持
+  trailingSlash: true,
   // 親ディレクトリの別 package-lock.json を誤検出しないよう明示
   outputFileTracingRoot: __dirname,
 

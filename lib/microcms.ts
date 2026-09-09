@@ -36,17 +36,43 @@ const EMPTY_LIST = <T,>(): MicroCMSList<T> => ({
   limit: 0,
 });
 
-/** 記事一覧。未設定・失敗時は空リストを返す（ページは落とさない） */
+/** microCMS の limit 上限 */
+const MAX_LIMIT = 100;
+
+/** 記事一覧（1ページ）。未設定・失敗時は空リストを返す（ページは落とさない） */
 export async function getBlogList(
   queries?: ListQuery,
 ): Promise<MicroCMSList<Blog>> {
   if (!client) return EMPTY_LIST<Blog>();
   try {
-    return await client.getList<Blog>({ endpoint: BLOG_ENDPOINT, queries });
+    const limit = Math.min(queries?.limit ?? MAX_LIMIT, MAX_LIMIT);
+    return await client.getList<Blog>({
+      endpoint: BLOG_ENDPOINT,
+      queries: { ...queries, limit },
+    });
   } catch (e) {
     console.error('[microcms] getBlogList failed:', e);
     return EMPTY_LIST<Blog>();
   }
+}
+
+/** 全記事をページングして取得（sitemap / generateStaticParams 用） */
+export async function getAllBlogs(fields?: string): Promise<Blog[]> {
+  if (!client) return [];
+  const out: Blog[] = [];
+  try {
+    for (let offset = 0; offset < 5000; offset += MAX_LIMIT) {
+      const res = await client.getList<Blog>({
+        endpoint: BLOG_ENDPOINT,
+        queries: { limit: MAX_LIMIT, offset, orders: '-publishedAt', fields },
+      });
+      out.push(...res.contents);
+      if (offset + MAX_LIMIT >= res.totalCount) break;
+    }
+  } catch (e) {
+    console.error('[microcms] getAllBlogs failed:', e);
+  }
+  return out;
 }
 
 /** 記事詳細。未設定・失敗時は null */

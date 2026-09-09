@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { getBlogList, getBlogBySlug, cmsConfigured } from '@/lib/microcms';
+import { getAllBlogs, getBlogBySlug, cmsConfigured } from '@/lib/microcms';
 import { blogSlug, blogHtml } from '@/cms/types';
 import { SITE } from '@/lib/site';
 import { articleSchema, breadcrumbSchema, jsonLd } from '@/seo/jsonld';
@@ -16,7 +16,7 @@ type Params = { slug: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
   if (!cmsConfigured) return [];
-  const { contents } = await getBlogList({ limit: 1000, fields: 'id,slug,seo' });
+  const contents = await getAllBlogs('id,slug,seo');
   return contents.map((b) => ({ slug: blogSlug(b) }));
 }
 
