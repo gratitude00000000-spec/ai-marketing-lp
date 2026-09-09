@@ -1,0 +1,9 @@
+# OS
+.DS_Store
+**/.DS_Store
+# tooling
+.netlify/
+.vercel/
+node_modules/
+# editor / local
+.claude/

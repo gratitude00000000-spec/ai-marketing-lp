@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログ記事 | AI集客ドットコム</title>
+  <meta name="description" content="AI集客ドットコム ブログ記事" />
+  <link rel="canonical" id="canonicalLink" href="https://ai-marketing-japan.jp/blog/" />
+  <meta property="og:title" content="ブログ記事 | AI集客ドットコム" />
+  <meta property="og:description" content="AI集客ドットコム ブログ記事。AIO・LLMO・MEO・GBP運用代行に関する最新情報。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://ai-marketing-japan.jp/blog/" />
+  <meta property="og:image" content="https://ai-marketing-japan.jp/ai-search-google-trend-.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="AI集客ドットコム" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ブログ記事 | AI集客ドットコム" />
+  <meta name="twitter:description" content="AI集客ドットコム ブログ記事。AIO・LLMO・MEO・GBP運用代行に関する最新情報。" />
+  <meta name="twitter:image" content="https://ai-marketing-japan.jp/ai-search-google-trend-.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#0d1f3c;--navy2:#1a3260;--gold:#f59e0b;--gold-l:#fbbf24;
+      --blue:#2563eb;--purple:#7c3aed;--white:#ffffff;--off:#f8fafc;
+      --g100:#f1f5f9;--g200:#e2e8f0;--g500:#64748b;--text:#0f172a;
+      --r:16px;--sh:0 8px 32px rgba(13,31,60,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--text);background:#fff;line-height:1.75}
+    h1,h2,h3,h4{font-family:"Shippori Mincho","Yu Mincho",serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1140px,calc(100% - 48px));margin:0 auto}
+
+    /* HEADER */
+    .site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--g200);box-shadow:0 2px 16px rgba(0,0,0,.06)}
+    .hd-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+    .hd-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .hd-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;overflow:hidden}
+    .hd-logo-name{font-size:16px;font-weight:900;color:var(--navy);font-family:"Shippori Mincho",serif;line-height:1.2}
+    .hd-logo-sub{font-size:10px;color:var(--g500)}
+    .hd-nav{display:flex;align-items:center;gap:2px}
+    .hd-nav a{padding:7px 11px;font-size:13px;color:var(--g500);border-radius:8px;transition:.2s;white-space:nowrap}
+    .hd-nav a:hover,.hd-nav a.active{color:var(--navy);background:var(--g100)}
+    .hd-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;border-radius:14px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:.2s}
+    .btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;box-shadow:0 12px 28px rgba(245,158,11,.32)}
+    .btn-gold:hover{transform:translateY(-2px)}
+    .btn-sm{min-height:40px;padding:0 18px;font-size:13px;border-radius:10px}
+
+    /* BREADCRUMB */
+    .breadcrumb{padding:14px 0;font-size:12px;color:var(--g500)}
+    .breadcrumb a{color:var(--blue)}
+    .breadcrumb a:hover{text-decoration:underline}
+    .breadcrumb span{margin:0 6px}
+
+    /* ARTICLE */
+    .article-wrap{max-width:800px;margin:0 auto;padding:40px 0 80px}
+    .article-cat{display:inline-block;padding:3px 12px;border-radius:999px;background:rgba(37,99,235,.1);color:#1d4ed8;font-size:12px;font-weight:700;margin-bottom:14px}
+    .article-title{font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--navy);line-height:1.3;margin-bottom:16px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--g500);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--g200)}
+    .article-eyecatch{width:100%;max-height:420px;object-fit:cover;border-radius:var(--r);margin-bottom:36px}
+    .article-body{font-size:16px;line-height:1.9;color:var(--text)}
+    .article-body h2{font-size:clamp(20px,2.8vw,28px);font-weight:800;color:var(--navy);margin:40px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--blue)}
+    .article-body h3{font-size:clamp(17px,2.2vw,22px);font-weight:700;color:var(--navy);margin:28px 0 12px}
+    .article-body h4{font-size:16px;font-weight:700;color:var(--navy);margin:20px 0 8px}
+    .article-body p{margin-bottom:18px}
+    .article-body ul,.article-body ol{padding-left:24px;margin-bottom:18px}
+    .article-body li{margin-bottom:6px}
+    .article-body img{border-radius:10px;margin:20px 0}
+    .article-body a{color:var(--blue);text-decoration:underline}
+    .article-body blockquote{border-left:4px solid var(--blue);padding:12px 20px;background:rgba(37,99,235,.05);border-radius:0 8px 8px 0;margin:20px 0;color:var(--g500)}
+    .article-body code{background:var(--g100);padding:2px 6px;border-radius:4px;font-size:14px}
+    .article-body pre{background:var(--navy);color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;margin:20px 0}
+    .article-body pre code{background:none;padding:0}
+
+    /* BACK LINK */
+    .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:14px;font-weight:700;margin-bottom:24px}
+    .back-link:hover{text-decoration:underline}
+
+    /* CTA BANNER */
+    .cta-banner{background:linear-gradient(135deg,#060f20,#1a3260);border-radius:20px;padding:36px;text-align:center;margin-top:56px}
+    .cta-banner h3{color:#fff;font-size:22px;margin-bottom:10px}
+    .cta-banner p{color:rgba(255,255,255,.75);font-size:14px;margin-bottom:20px}
+    .cta-banner a{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-radius:14px;padding:14px 32px;font-weight:800;font-size:15px;transition:.2s}
+    .cta-banner a:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(37,99,235,.38)}
+
+    /* LOADING/ERROR */
+    .loading{text-align:center;padding:80px;color:var(--g500);font-size:15px}
+    .error{text-align:center;padding:80px;color:#dc2626}
+
+    /* FOOTER */
+    footer{background:var(--navy);padding:30px 0;text-align:center;color:rgba(255,255,255,.45);font-size:13px}
+    footer a{color:rgba(255,255,255,.5)}
+    footer a:hover{color:rgba(255,255,255,.8)}
+    .footer-nav{display:flex;justify-content:center;gap:24px;margin-bottom:12px;flex-wrap:wrap}
+    .footer-nav a{font-size:13px}
+
+    @media(max-width:960px){.hd-nav{display:none}}
+    @media(max-width:600px){.hd-cta .btn-sm:first-child{display:none}}
+
+    /* ── モバイルナビ ── */
+    .mob-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+    .mob-ham span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+    .mob-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .mob-ham.open span:nth-child(2){opacity:0}
+    .mob-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mob-nav{position:fixed;top:61px;left:0;right:0;background:#fff;border-bottom:1px solid var(--g200);box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:99;display:none;flex-direction:column;padding:8px 0}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:14px 24px;font-size:15px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--g100);transition:.2s}
+    .mob-nav a:last-child{border-bottom:none}
+    .mob-nav a:hover,.mob-nav a.active{background:var(--g100);color:var(--blue)}
+    @media(max-width:960px){.hd-cta{display:none}.mob-ham{display:flex;margin-right:4px}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap hd-inner">
+    <a href="/" class="hd-logo">
+      <div class="hd-logo-icon"><img src="/images/logo-ai-llmo-aio-aeo-webmarketing-.png" alt="ロゴ" style="width:38px;height:38px;object-fit:contain;"></div>
+      <div>
+        <div class="hd-logo-name">AI集客ドットコム</div>
+        <div class="hd-logo-sub">by 株式会社Gratitude</div>
+      </div>
+    </a>
+    <nav class="hd-nav">
+      <a href="/">トップ</a>
+      <a href="/#services">サービス</a>
+      <a href="/#plans">料金プラン</a>
+      <a href="/blog/" class="active">ブログ</a>
+      <a href="/about/">会社概要</a>
+      <a href="/contact/">お問い合わせ</a>
+    </nav>
+    <div class="hd-cta">
+      <a class="btn btn-sm" href="mailto:gratitude00000000@gmail.com?subject=集客支援について相談したい" style="background:var(--off);border:1px solid var(--g200);color:var(--navy)">
+        ✉ メールで相談する
+      </a>
+      <a class="btn btn-gold btn-sm" href="tel:0989755682">📞 098-975-5682</a>
+    </div>
+    <button class="mob-ham" id="mobHam" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mob-nav" id="mobNav">
+  <a href="/">トップ</a>
+  <a href="/#services">サービス</a>
+  <a href="/#plans">料金プラン</a>
+  <a href="/blog/" class="active">ブログ</a>
+  <a href="/about/">会社概要</a>
+  <a href="/contact/">お問い合わせ</a>
+</nav>
+<!-- BREADCRUMB -->
+<div class="wrap breadcrumb">
+  <a href="/">トップ</a><span>›</span>
+  <a href="/blog/">ブログ</a><span>›</span>
+  <span id="breadcrumbTitle">記事</span>
+</div>
+
+<!-- ARTICLE -->
+<div class="wrap">
+  <div class="article-wrap" id="articleContainer">
+    <div class="loading"><div style="font-size:40px;margin-bottom:12px">📝</div>記事を読み込み中...</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-nav">
+      <a href="/">トップ</a>
+      <a href="/#services">サービス</a>
+      <a href="/#plans">料金プラン</a>
+      <a href="/blog/">ブログ</a>
+      <a href="/about/">会社概要</a>
+      <a href="/contact/">お問い合わせ</a>
+    </div>
+    <p>© 株式会社Gratitude All Rights Reserved. | <a href="https://gratitude-japan.com">株式会社Gratitude 公式サイト</a></p>
+  </div>
+</footer>
+
+<script>
+  // ── microCMS 記事取得 ──
+  const SERVICE_DOMAIN = "7y2xctaof8";
+  const API_KEY = "RPDsOCCOyqnFxFP2khE7cYzATnTjKOKMjed5";
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+  }
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name);
+  }
+
+  async function loadPost() {
+    const id = getParam('id');
+    const container = document.getElementById('articleContainer');
+
+    if (!id) {
+      container.innerHTML = '<div class="error">⚠️ 記事IDが指定されていません。<br><a href="/blog/" style="color:var(--blue)">← ブログ一覧に戻る</a></div>';
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://${SERVICE_DOMAIN}.microcms.io/api/v1/blogs/${id}`,
+        { headers: { 'X-MICROCMS-API-KEY': API_KEY } }
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const post = await res.json();
+
+      // SEO fields with fallbacks
+      const seo = post.seo || {};
+      const BASE = 'https://ai-marketing-japan.jp';
+      const DEFAULT_IMG = `${BASE}/ai-search-google-trend-.png`;
+      const SITE_NAME = 'AI集客ドットコム';
+
+      const seoTitle       = seo.seoTitle || post.title || SITE_NAME;
+      const metaDesc       = seo.metaDescription || post.description || post.title || '';
+      const ogDesc         = seo.ogpDescription || metaDesc;
+      const ogImage        = (seo.ogpImage && seo.ogpImage.url) || (post.eyecatch && post.eyecatch.url) || DEFAULT_IMG;
+      const slug           = seo.slug || post.id || '';
+      const canonicalUrl   = `${BASE}/blog/${slug}`;
+
+      document.title = `${seoTitle} | ${SITE_NAME}`;
+      document.querySelector('meta[name="description"]').content = metaDesc;
+      document.getElementById('canonicalLink').href = canonicalUrl;
+
+      const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.content = val; };
+      setMeta('meta[property="og:title"]',       `${seoTitle} | ${SITE_NAME}`);
+      setMeta('meta[property="og:description"]', ogDesc);
+      setMeta('meta[property="og:url"]',         canonicalUrl);
+      setMeta('meta[property="og:image"]',       ogImage);
+      setMeta('meta[name="twitter:title"]',      `${seoTitle} | ${SITE_NAME}`);
+      setMeta('meta[name="twitter:description"]',ogDesc);
+      setMeta('meta[name="twitter:image"]',      ogImage);
+
+      document.getElementById('breadcrumbTitle').textContent = post.title;
+
+      container.innerHTML = `
+        <a href="/blog/" class="back-link">← ブログ一覧に戻る</a>
+        ${post.category ? `<div class="article-cat">${post.category.name}</div>` : ''}
+        <h1 class="article-title">${post.title}</h1>
+        <div class="article-meta">
+          <span>📅 ${formatDate(post.publishedAt)}</span>
+          ${post.updatedAt !== post.publishedAt ? `<span>🔄 更新: ${formatDate(post.updatedAt)}</span>` : ''}
+        </div>
+        ${post.eyecatch ? `<img class="article-eyecatch" src="${post.eyecatch.url}" alt="${post.title}">` : ''}
+        <div class="article-body">${post.content || post.body || ''}</div>
+        <div class="cta-banner">
+          <h3>AI集客について、まずはご相談ください</h3>
+          <p>AIO・LLMO・MEO対策、GBP運用代行まで、株式会社Gratitudeが全国対応でサポートします。</p>
+          <a href="/contact/">無料相談を申し込む →</a>
+        </div>
+      `;
+    } catch(e) {
+      container.innerHTML = `<div class="error">⚠️ 記事の読み込みに失敗しました。<br><small>${e.message}</small><br><a href="/blog/" style="color:var(--blue);margin-top:12px;display:inline-block">← ブログ一覧に戻る</a></div>`;
+    }
+  }
+
+  loadPost();
+
+  // ── モバイルナビ ──
+  const mobHam = document.getElementById('mobHam');
+  const mobNav = document.getElementById('mobNav');
+  if(mobHam && mobNav){
+    mobHam.addEventListener('click', () => {
+      mobHam.classList.toggle('open');
+      mobNav.classList.toggle('open');
+    });
+    mobNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobHam.classList.remove('open');
+      mobNav.classList.remove('open');
+    }));
+  }
+</script>
+</body>
+</html>
