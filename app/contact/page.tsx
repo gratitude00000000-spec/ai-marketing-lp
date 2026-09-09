@@ -37,6 +37,7 @@ export default function ContactPage() {
 
       <SiteHeader active="/contact/" />
 
+      <main>
       <div className="page-hero">
         <div className="wrap">
           <span className="ey ey-w">AI集客ドットコム</span>
@@ -137,6 +138,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <SiteFooter />
     </>

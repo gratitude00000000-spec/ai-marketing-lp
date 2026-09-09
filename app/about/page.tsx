@@ -69,6 +69,7 @@ export default function AboutPage() {
 
       <SiteHeader active="/about/" />
 
+      <main>
       <div className="page-hero">
         <div className="wrap">
           <span className="ey ey-w">株式会社Gratitude</span>
@@ -173,6 +174,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <SiteFooter />
     </>

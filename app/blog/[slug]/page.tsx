@@ -95,6 +95,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<Para
 
       <SiteHeader active="/blog/" />
 
+      <main>
       <div className="wrap breadcrumb">
         <Link href="/">トップ</Link>
         <span>›</span>
@@ -131,6 +132,8 @@ export default async function BlogArticlePage({ params }: { params: Promise<Para
           </div>
         </article>
       </div>
+
+      </main>
 
       <SiteFooter />
     </>

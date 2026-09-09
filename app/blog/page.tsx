@@ -46,6 +46,7 @@ export default async function BlogListPage() {
 
       <SiteHeader active="/blog/" />
 
+      <main>
       <div className="page-hero">
         <div className="wrap">
           <span className="ey ey-w">AI集客ドットコム</span>
@@ -88,6 +89,8 @@ export default async function BlogListPage() {
           )}
         </div>
       </section>
+
+      </main>
 
       <SiteFooter />
     </>

@@ -6,6 +6,8 @@ export default function NotFound() {
   return (
     <>
       <SiteHeader />
+
+      <main>
       <section className="sec-72">
         <div className="wrap" style={{ textAlign: 'center', maxWidth: 560 }}>
           <span className="ey ey-b">404</span>
@@ -18,6 +20,8 @@ export default function NotFound() {
           </Link>
         </div>
       </section>
+      </main>
+
       <SiteFooter />
     </>
   );

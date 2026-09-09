@@ -51,6 +51,7 @@ export default function HomePage() {
 
       <SiteHeader active="/" />
 
+      <main>
       {/* ═══ HERO ═══ */}
       <section className="hero" id="top">
         <div className="wrap hero-grid">
@@ -276,6 +277,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <SiteFooter />
     </>
