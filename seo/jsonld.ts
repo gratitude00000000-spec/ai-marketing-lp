@@ -3,6 +3,12 @@ import type { Faq } from '@/lib/site';
 
 const abs = (path = '') => `${SITE.url}${path}`;
 
+/**
+ * 運営会社。株式会社Gratitude は来店型の営業所ではなく、全国対応の
+ * Web集客支援サービスのため LocalBusiness ではなく Organization を使う。
+ * 住所は E-E-A-T（実在性）のために記載するが、店舗営業時間や priceRange など
+ * 来店型ビジネスの属性・根拠のない値は入れない。
+ */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -11,15 +17,25 @@ export function organizationSchema() {
     alternateName: SITE.name,
     url: abs('/'),
     logo: abs('/images/logo.png'),
-    telephone: CONTACT.tel,
     email: CONTACT.email,
+    telephone: CONTACT.tel,
     address: {
       '@type': 'PostalAddress',
       postalCode: CONTACT.address.zip.replace('〒', ''),
       addressCountry: 'JP',
       addressRegion: '沖縄県',
-      streetAddress: CONTACT.address.line,
+      addressLocality: '那覇市',
+      streetAddress: '牧志2-18-4 パレットマキシ2-C',
     },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: CONTACT.tel,
+      email: CONTACT.email,
+      areaServed: 'JP',
+      availableLanguage: ['ja'],
+    },
+    areaServed: { '@type': 'Country', name: '日本' },
     sameAs: [SITE.officialUrl],
     description:
       'AI時代のSEO・MEO・AIO・LLMO対策、Googleビジネスプロフィール運用代行を全国・全業種に提供する株式会社Gratitude。',
@@ -37,29 +53,11 @@ export function webSiteSchema() {
   };
 }
 
-export function localBusinessSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: SITE.name,
-    image: abs(SITE.ogImage),
-    url: abs('/'),
-    telephone: CONTACT.tel,
-    email: CONTACT.email,
-    priceRange: '¥¥',
-    address: {
-      '@type': 'PostalAddress',
-      postalCode: CONTACT.address.zip.replace('〒', ''),
-      addressCountry: 'JP',
-      addressRegion: '沖縄県',
-      addressLocality: '那覇市',
-      streetAddress: '牧志2-18-4 パレットマキシ2-C',
-    },
-    areaServed: { '@type': 'Country', name: '日本' },
-    parentOrganization: { '@type': 'Organization', name: SITE.company, url: SITE.officialUrl },
-  };
-}
-
+/**
+ * FAQ。Google の FAQ リッチリザルトは 2026年5月に一般サイト向けで終了しているため、
+ * 検索結果での表示効果は想定しない。掲載目的は AI検索（AIO/LLMO）が Q&A を
+ * 構造として理解しやすくすること。表示している FAQ 本文と 1:1 で一致させる。
+ */
 export function faqSchema(items: Faq[]) {
   return {
     '@context': 'https://schema.org',
@@ -97,10 +95,11 @@ export function articleSchema(a: {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: a.title,
-    description: a.description,
+    ...(a.description ? { description: a.description } : {}),
     image: a.image ? [a.image] : [abs(SITE.ogImage)],
     datePublished: a.datePublished,
     dateModified: a.dateModified,
+    inLanguage: 'ja',
     mainEntityOfPage: { '@type': 'WebPage', '@id': abs(a.path) },
     author: { '@type': 'Organization', name: SITE.company, url: abs('/') },
     publisher: {

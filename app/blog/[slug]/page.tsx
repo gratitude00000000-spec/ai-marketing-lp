@@ -77,7 +77,8 @@ export default async function BlogArticlePage({ params }: { params: Promise<Para
         id="ld-article"
         {...jsonLd([
           articleSchema({
-            title: post.seo?.seoTitle || post.title,
+            // headline は画面の H1（post.title）と一致させる。SEO用の別タイトルは <title> のみ。
+            title: post.title,
             description: post.seo?.metaDescription || post.description,
             path,
             image,

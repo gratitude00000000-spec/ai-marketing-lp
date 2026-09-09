@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CONTACT } from '@/lib/site';
-import { organizationSchema, localBusinessSchema, breadcrumbSchema, jsonLd } from '@/seo/jsonld';
+import { organizationSchema, breadcrumbSchema, jsonLd } from '@/seo/jsonld';
 
 export const metadata: Metadata = {
   title: '会社概要',
@@ -60,7 +60,6 @@ export default function AboutPage() {
         id="ld-about"
         {...jsonLd([
           organizationSchema(),
-          localBusinessSchema(),
           breadcrumbSchema([
             { name: 'トップ', path: '/' },
             { name: '会社概要', path: '/about/' },
