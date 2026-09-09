@@ -153,11 +153,15 @@
 <!-- BLOG LIST -->
 <section class="sec">
   <div class="wrap">
-    <div id="blogContainer" class="blog-loading">
-      <div style="font-size:32px;margin-bottom:12px">📝</div>
-      記事を読み込み中...
+    <div class="blog-loading" style="text-align:center;padding:80px 24px;">
+      <div style="font-size:40px;margin-bottom:16px">📝</div>
+      <p style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px">ブログはただいまリニューアル準備中です</p>
+      <p style="font-size:14px;color:var(--g500);line-height:1.9">
+        AI集客・AIO・LLMO・MEO・GBP運用に関する記事を、近日あらためて公開します。<br>
+        ご相談は <a href="/contact/" style="color:var(--blue);font-weight:600">お問い合わせ</a> または
+        <a href="https://lin.ee/oJUbunU" target="_blank" rel="noopener noreferrer" style="color:var(--line, #06C755);font-weight:600">LINE</a> からお気軽にどうぞ。
+      </p>
     </div>
-    <div class="pagination" id="pagination" style="display:none"></div>
   </div>
 </section>
 
@@ -177,68 +181,6 @@
 </footer>
 
 <script>
-  // ── microCMS ブログ取得 ──
-  const SERVICE_DOMAIN = "7y2xctaof8";
-  const API_KEY = "RPDsOCCOyqnFxFP2khE7cYzATnTjKOKMjed5";
-  const PER_PAGE = 9;
-  let currentOffset = 0;
-
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
-  }
-
-  function renderBlogs(blogs) {
-    if (!blogs || blogs.length === 0) {
-      return `<div class="blog-error">📭 まだ記事がありません。</div>`;
-    }
-    return `<div class="blog-grid">${blogs.map(b => `
-      <a href="/blog/post.html?id=${b.id}" class="blog-card">
-        ${b.eyecatch
-          ? `<img class="blog-thumb" src="${b.eyecatch.url}" alt="${b.title}" loading="lazy">`
-          : `<div class="blog-thumb-placeholder">📝</div>`
-        }
-        <div class="blog-body">
-          ${b.category ? `<span class="blog-cat">${b.category.name}</span>` : ''}
-          <h3>${b.title}</h3>
-          <div class="blog-date">📅 ${formatDate(b.publishedAt)}</div>
-        </div>
-      </a>
-    `).join('')}</div>`;
-  }
-
-  async function loadBlogs(offset = 0) {
-    const container = document.getElementById('blogContainer');
-    container.innerHTML = '<div class="blog-loading"><div style="font-size:32px;margin-bottom:12px">📝</div>記事を読み込み中...</div>';
-    try {
-      const res = await fetch(
-        `https://${SERVICE_DOMAIN}.microcms.io/api/v1/blogs?orders=-publishedAt&limit=${PER_PAGE}&offset=${offset}`,
-        { headers: { 'X-MICROCMS-API-KEY': API_KEY } }
-      );
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      container.innerHTML = renderBlogs(data.contents);
-
-      // pagination
-      const total = data.totalCount;
-      const pag = document.getElementById('pagination');
-      if (total > PER_PAGE) {
-        pag.style.display = 'flex';
-        const pages = Math.ceil(total / PER_PAGE);
-        const currentPage = Math.floor(offset / PER_PAGE);
-        pag.innerHTML = Array.from({length: pages}, (_, i) =>
-          `<button class="${i === currentPage ? 'active' : ''}" onclick="loadBlogs(${i * PER_PAGE})">${i+1}</button>`
-        ).join('');
-      } else {
-        pag.style.display = 'none';
-      }
-    } catch(e) {
-      container.innerHTML = `<div class="blog-error">⚠️ 記事の読み込みに失敗しました。<br><small>${e.message}</small></div>`;
-    }
-  }
-
-  loadBlogs();
-
   // ── モバイルナビ ──
   const mobHam = document.getElementById('mobHam');
   const mobNav = document.getElementById('mobNav');
