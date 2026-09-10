@@ -19,14 +19,9 @@ const nextConfig = {
     ],
   },
 
-  async redirects() {
-    // 旧ブログ記事URL（クエリ方式）→ ブログ一覧への一般転送（フォールバック）。
-    // 記事別の 1:1 リダイレクト（308・クエリ除去・1ホップ）は middleware.ts で先に処理する。
-    return [
-      { source: '/blog/post.html', destination: '/blog/', permanent: true },
-      { source: '/blog/post', destination: '/blog/', permanent: true },
-    ];
-  },
+  // 旧ブログURL（/blog/post.html?id= ・ /blog/<id>）→ 新slug の 1:1 恒久リダイレクトは
+  // middleware.ts で処理する。next.config の redirects() は step 2（middleware より前）で
+  // 実行されるうえ未使用クエリを転送先へ引き継ぐため、ここでは扱わない。
 
   async headers() {
     return [
