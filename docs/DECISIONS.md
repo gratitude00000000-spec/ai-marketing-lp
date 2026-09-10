@@ -95,8 +95,9 @@
 ### D-014 sitemap の静的ページから不正確な lastmod を削除する
 - **判断:** `app/sitemap.ts` で静的5 URL は `<loc>` のみ出力（`lastModified` を付けない）。`changefreq` / `priority` も付けない。記事2 URL のみ `lastmod` = microCMS `updatedAt`。
 - **理由:** `lastModified: new Date()` だとビルド／再デプロイのたびに日付が動き、内容を変えていないのに「更新扱い」になる。正確な重要更新日を継続管理できるようになるまでは出さないほうが良い。`changefreq` / `priority` は Google が使用しない。
-- **不採用:** 全 URL に `new Date()` の lastmod ＋ changefreq/priority を付ける（親 CLAUDE.md の初期テンプレートはこの形。本プロジェクトは意図的に不採用）。
-- **将来の注意:** 静的ページの正確な更新日を管理できる仕組みができたら lastmod を戻してよい。この判断は親 CLAUDE.md の「初期SEO純正装備」テンプレートからの意図的な逸脱。
+- **不採用:** 全 URL に `new Date()` の lastmod ＋ changefreq/priority を機械的に付ける。
+- **将来の注意:** 静的ページの正確な更新日を管理できる仕組みができたら lastmod を戻してよい。
+- **2026-09-10 追記:** 当初この判断は親 CLAUDE.md の「初期SEO純正装備」テンプレート（全URLに `new Date()`）からの逸脱だったが、親 CLAUDE.md 側を「lastModified は正確に取得できる URL だけ／静的ページは省略可／changeFrequency・priority は任意」に更新したため、現在は親テンプレートと整合。
 
 ### D-015 運営会社の構造化データは `LocalBusiness` ではなく `Organization` を使う
 - **判断:** 会社の JSON-LD は `Organization`。`LocalBusiness`（`ProfessionalService`）は使わない。

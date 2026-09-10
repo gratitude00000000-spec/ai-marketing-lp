@@ -8,17 +8,23 @@
 
 ## 1. 現在の本番
 
-| 項目 | 値 |
-|---|---|
-| 本番 URL | `https://ai-marketing-japan.jp` |
-| 稼働中のもの | **Next.js 版（App Router）が本番稼働中** |
-| Netlify published deploy | `6aa2692944f06588af258fe7` |
-| 公開日時 | `2026-09-10 08:24 UTC` |
-| context | `production` |
-| `main` / `origin/main` | `e45fcd5ec498df58096b6ca72cd2107d6866d9bc` |
-| Netlify サイト | `gratitude-lp` / site id `b620e9ab-586b-4b0c-a182-1b7d20e35d46` |
-| GitHub 自動デプロイ | **未設定**（`installation_id:false`） |
-| デプロイ方式 | **Netlify CLI による手動デプロイ**（`npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`。`main` チェックアウト状態で実行） |
+| 項目 | 値 | 確認方法 |
+|---|---|---|
+| 本番 URL | `https://ai-marketing-japan.jp` | 固定 |
+| 稼働中のもの | **Next.js 版（App Router）が本番稼働中** | — |
+| Netlify published deploy | 下記コマンドで確認した値を正とする（記録時点: `6aa2692944f06588af258fe7` / 2026-09-10 08:24 UTC / context production） | `npx netlify api getSite --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46"}'` の `published_deploy.id` |
+| **本番にデプロイされているアプリケーションコードのコミット** | `e45fcd5ec498df58096b6ca72cd2107d6866d9bc`（2026-09-10 の GA4 有効化コミット）。**これは「本番アプリのコミット」であって「現在の `main` の HEAD」ではない** | このファイル（更新は本番デプロイ時のみ） |
+| 現在の `main` / `origin/main` の HEAD | **このファイルに固定値で書かない。** セッション開始時に毎回コマンドで確認する | `git rev-parse HEAD` / `git fetch origin && git rev-parse origin/main` |
+| Netlify サイト | `gratitude-lp` / site id `b620e9ab-586b-4b0c-a182-1b7d20e35d46` | 固定 |
+| GitHub 自動デプロイ | **未設定**（`installation_id:false`）。push しても本番は更新されない | — |
+| デプロイ方式 | **Netlify CLI による手動デプロイ**（`npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`。`main` チェックアウト状態で実行） | — |
+
+> **重要:** このドキュメントや `CLAUDE.md` を `main` にマージすると `main` の HEAD は変わるが、
+> **本番アプリのコード（`e45fcd5`）と published deploy は変わらない**（自動デプロイなしのため）。
+> ドキュメントだけを `main` にマージした場合、`main` の HEAD ≠ 本番アプリのコミット になる。
+> 「本番に今どのコードが出ているか」を知りたいときは、上表の
+> 「本番にデプロイされているアプリケーションコードのコミット」＋ Netlify API の `published_deploy.id` を見る。
+> `git rev-parse origin/main` の結果を「本番のコード」と誤解しない。
 
 ---
 
@@ -28,8 +34,8 @@
 |---|---|
 | 旧静的サイトの deploy | `6aa1641c214671978323a274`（2026-09-09 13:50、context production、state ready で保持） |
 | 復旧方法 | ① Netlify 管理画面 → Deploys → 当該 deploy の「Publish deploy」／ ② `npx netlify api restoreSiteDeploy --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46","deploy_id":"6aa1641c214671978323a274"}'` |
-| 前提条件 | 復旧前に**現在の published deploy を確認**すること。**ユーザーの承認なしにロールバックしない** |
-| 補足 | `main`（`e45fcd5`）は無変更のため、`git archive main \| tar` でクリーン書き出し → `npx netlify deploy --prod --dir=` でも旧状態を作り直せる |
+| 前提条件 | **復旧前に、Netlify API で現在の `published_deploy.id` を確認する**こと。**ユーザーの承認なしにロールバックしない** |
+| 補足 | 本番アプリのコミット（記録時点 `e45fcd5`）を `git archive <commit> \| tar` でクリーン書き出し → `npx netlify deploy --prod --dir=` でも旧状態を作り直せる |
 
 ---
 

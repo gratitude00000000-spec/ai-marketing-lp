@@ -6,10 +6,27 @@
 コード品質・公開前チェック等）はここには記載しません。
 **親の指示と矛盾を発見した場合は、作業を進めずユーザーへ報告してください。**
 
-現在の本番状態・Git状態・残タスクは次の2ファイルに集約しています（起動時に自動で読み込まれます）。
+## 親 CLAUDE.md と このファイルの責任範囲
+
+- **親 CLAUDE.md**（`/Users/user/Desktop/AI marketing/CLAUDE.md`）= 全サイト共通ルール（HP制作・SEO・AIO/LLMO・UX/CRO・セキュリティ・microCMS 一般運用・コード品質・公開前確認）。
+- **このファイル** = AI集客ドットコム固有ルールのみ。親と同じ一般ルールは重複記載しない。
+- **現在の事実**（本番状態・Git 状態・稼働機能・残タスク）= `docs/PROJECT_STATUS.md` が正本。
+- **過去の判断理由** = `docs/DECISIONS.md` を**必要時に**確認（自動読込しない。下記参照）。
+- 親とこのファイルの指示が矛盾して解決できない場合は、**勝手に選択せず作業を停止してユーザーへ報告する**。
+
+現在の本番状態は起動時に自動で読み込まれます。
 
 @docs/PROJECT_STATUS.md
-@docs/DECISIONS.md
+
+---
+
+## `docs/DECISIONS.md` の読み方
+
+- `docs/DECISIONS.md`（設計判断ログ・追記型）は**毎セッション自動では読み込まない**（今後長くなるため）。
+- 次の領域に関わる変更を行う**前に**、関連する決定を読む：
+  アーキテクチャ／デプロイ／SEO／構造化データ（JSON-LD）／robots／sitemap／URL 設計・リダイレクト／microCMS／GA4／セキュリティ。
+- 過去の決定を変えるときは、**既存記録を削除・上書きせず、新しい日付で追記**する（「変更」「廃止」「置換」を明記）。
+- 単純な文章修正など、判断履歴と無関係な作業では読み込まなくてよい。
 
 ---
 
@@ -20,7 +37,7 @@ MDと実際のコード・本番が矛盾したときは、**勝手に判断せ�
 1. 現在の本番環境の実測結果（`curl` / Netlify API の getSite 等）
 2. 現在チェックアウトしている Git コード
 3. `docs/PROJECT_STATUS.md`
-4. `docs/DECISIONS.md`
+4. `docs/DECISIONS.md`（関連する作業のときに参照）
 5. Git コミット履歴
 6. Claude Code のローカルメモリ（`~/.claude/.../memory/`）
 7. 過去の会話履歴
@@ -33,13 +50,13 @@ Git 管理 MD（本ファイル・`docs/PROJECT_STATUS.md`・`docs/DECISIONS.md`
 ## セッション開始時に必ず行うこと
 
 1. この `CLAUDE.md` を読む
-2. `docs/PROJECT_STATUS.md` を読む
-3. `docs/DECISIONS.md` を読む
-4. 現在のブランチ・HEAD・作業ツリーの状態を確認（`git status` / `git rev-parse HEAD`）
-5. `origin/main` との差分を確認（`git fetch origin && git log --oneline origin/main..HEAD`）
-6. 本番に関係する作業では、現在の Netlify published deploy を確認
+2. `docs/PROJECT_STATUS.md` を読む（`@import` で自動読込されるが内容を必ず把握する）
+3. 現在のブランチ・HEAD・作業ツリーの状態を確認（`git status` / `git rev-parse HEAD`）
+4. `origin/main` との差分を確認（`git fetch origin && git rev-parse origin/main && git log --oneline origin/main..HEAD`）
+5. 本番に関係する作業では、現在の Netlify published deploy を確認
    （`npx netlify api getSite --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46"}'`）
-7. `docs/PROJECT_STATUS.md` の「確認日」が古い場合は、コード・本番・Git で再確認してから進める
+6. `docs/PROJECT_STATUS.md` の「確認日」が古い場合は、コード・本番・Git で再確認してから進める
+7. 上記の領域（アーキテクチャ／デプロイ／SEO 等）に関わる作業なら `docs/DECISIONS.md` の関連項目を読む
 
 ---
 
