@@ -25,7 +25,20 @@ export type BlogSeo = {
   metaDescription?: string;
   ogpDescription?: string;
   ogpImage?: MicroCMSImage;
+  keywords?: string;
   slug?: string;
+  /** 既存スキーマのスペル揺れ（"slug" ではなく "slag" で登録されている） */
+  slag?: string;
+};
+
+/**
+ * 移行対象の既存記事 → 確定 URL スラッグ（ユーザー承認済み）。
+ * URL の恒久性を CMS フィールドの記入漏れに依存させないため、コード側を正とする。
+ * next.config.mjs の LEGACY_ARTICLES と対で維持すること。
+ */
+export const LEGACY_SLUGS: Record<string, string> = {
+  qln47wv3gx: 'ai-era-seo-meo-guide',
+  yk421h0dsqw: 'what-is-ai-marketing',
 };
 
 export type Blog = {
@@ -48,9 +61,9 @@ export type MicroCMSList<T> = {
   limit: number;
 };
 
-/** 記事の URL スラッグを決める（seo.slug → slug → id の順） */
+/** 記事の URL スラッグを決める（確定マップ → seo.slug → seo.slag → slug → id の順） */
 export function blogSlug(b: Pick<Blog, 'id' | 'slug' | 'seo'>): string {
-  return b.seo?.slug || b.slug || b.id;
+  return LEGACY_SLUGS[b.id] || b.seo?.slug || b.seo?.slag || b.slug || b.id;
 }
 
 /** 本文 HTML を取り出す */

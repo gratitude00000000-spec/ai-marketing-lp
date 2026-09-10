@@ -1,6 +1,7 @@
 import 'server-only';
 import { createClient } from 'microcms-js-sdk';
 import type { Blog, Category, MicroCMSList } from '@/cms/types';
+import { LEGACY_SLUGS, blogSlug } from '@/cms/types';
 
 /* ============================================================
    microCMS クライアント（サーバー専用）
@@ -90,25 +91,37 @@ export async function getBlogById(contentId: string): Promise<Blog | null> {
 }
 
 /**
- * slug から記事を引く。
- * seo.slug / slug フィールドで絞り込み、無ければ id 直引きにフォールバック。
+ * URL スラッグから記事を引く。正規スラッグ（blogSlug()）に一致する記事だけを返す。
+ * 非正規のスラッグ／生 id でのアクセスは null（= 404 or リダイレクト）とし、重複URLを防ぐ。
  */
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   if (!client) return null;
+
+  const canonical = (post: Blog | null): Blog | null =>
+    post && blogSlug(post) === slug ? post : null;
+
+  // 確定スラッグ（コード側が正）は id 直引きへ
+  const legacyId = Object.keys(LEGACY_SLUGS).find((id) => LEGACY_SLUGS[id] === slug);
+  if (legacyId) {
+    const hit = canonical(await getBlogById(legacyId));
+    if (hit) return hit;
+  }
+
   try {
-    for (const field of ['seo.slug', 'slug']) {
+    for (const field of ['seo.slug', 'seo.slag', 'slug']) {
       const res = await client
         .getList<Blog>({
           endpoint: BLOG_ENDPOINT,
           queries: { filters: `${field}[equals]${slug}`, limit: 1 },
         })
         .catch(() => null);
-      if (res && res.contents.length > 0) return res.contents[0];
+      const hit = res && res.contents.length > 0 ? canonical(res.contents[0]) : null;
+      if (hit) return hit;
     }
   } catch (e) {
     console.error(`[microcms] getBlogBySlug(${slug}) query failed:`, e);
   }
-  return getBlogById(slug);
+  return canonical(await getBlogById(slug));
 }
 
 export async function getCategoryList(): Promise<MicroCMSList<Category>> {

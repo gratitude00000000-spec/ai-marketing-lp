@@ -20,9 +20,30 @@ const nextConfig = {
   },
 
   async redirects() {
+    // 旧URL → 新slug の 1:1 恒久リダイレクト（Next.js の permanent:true は 308）。
+    // 記事別リダイレクトを、下の一般転送（/blog/post.html → /blog/）より必ず先に評価する。
+    const LEGACY_ARTICLES = [
+      { id: 'qln47wv3gx', slug: 'ai-era-seo-meo-guide' },
+      { id: 'yk421h0dsqw', slug: 'what-is-ai-marketing' },
+    ];
+
+    const articleRedirects = LEGACY_ARTICLES.flatMap(({ id, slug }) => [
+      // 旧静的サイトのクエリ方式 URL。URL文字列にクエリを書かず has(type:'query') で判定。
+      // 名前付きキャプチャ (?<id>...) で値を「消費」し、?id= を転送先へ残さない。
+      {
+        source: '/blog/post.html',
+        has: [{ type: 'query', key: 'id', value: `(?<id>${id})` }],
+        destination: `/blog/${slug}/`,
+        permanent: true,
+      },
+      // 移行直後の id ベース URL（末尾スラッシュ有無の両方）
+      { source: `/blog/${id}`, destination: `/blog/${slug}/`, permanent: true },
+      { source: `/blog/${id}/`, destination: `/blog/${slug}/`, permanent: true },
+    ]);
+
     return [
-      // 旧ブログ記事URL（クエリ方式）→ ブログ一覧へ。
-      // 個別記事の 1:1 リダイレクトは記事slug確定後に追記する。
+      ...articleRedirects,
+      // 一般転送（個別に該当しない旧ブログURL）→ ブログ一覧へ。
       { source: '/blog/post.html', destination: '/blog/', permanent: true },
       { source: '/blog/post', destination: '/blog/', permanent: true },
     ];
