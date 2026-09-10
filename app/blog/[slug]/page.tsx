@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -73,7 +72,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<Para
 
   return (
     <>
-      <Script
+      <script
         id="ld-article"
         {...jsonLd([
           articleSchema({

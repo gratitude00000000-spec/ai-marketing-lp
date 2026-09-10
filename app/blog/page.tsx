@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { getBlogList, cmsConfigured } from '@/lib/microcms';
@@ -34,7 +33,7 @@ export default async function BlogListPage() {
 
   return (
     <>
-      <Script
+      <script
         id="ld-blog"
         {...jsonLd(
           breadcrumbSchema([

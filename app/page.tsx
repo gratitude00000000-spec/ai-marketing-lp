@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -47,7 +46,7 @@ const INDUSTRIES = [
 export default function HomePage() {
   return (
     <>
-      <Script id="ld-org" {...jsonLd([organizationSchema(), webSiteSchema(), faqSchema(HOME_FAQ)])} />
+      <script id="ld-org" {...jsonLd([organizationSchema(), webSiteSchema(), faqSchema(HOME_FAQ)])} />
 
       <SiteHeader active="/" />
 

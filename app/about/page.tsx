@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CONTACT } from '@/lib/site';
@@ -56,7 +55,7 @@ const SERVICES = [
 export default function AboutPage() {
   return (
     <>
-      <Script
+      <script
         id="ld-about"
         {...jsonLd([
           organizationSchema(),
