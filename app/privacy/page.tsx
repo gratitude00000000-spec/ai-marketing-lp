@@ -107,8 +107,9 @@ export default function PrivacyPage() {
                     送信・保管されます。データは日本国外のサーバーで処理・保管される場合があります。
                   </li>
                   <li>
-                    <strong>Google（Google LLC）</strong>：メールによるお問い合わせの受信・返信および
-                    Google Fonts によるフォント配信に利用しています。
+                    <strong>Google（Google LLC）</strong>：メールによるお問い合わせの受信・返信、
+                    Google Fonts によるフォント配信、および Google アナリティクス（GA4）による
+                    アクセス解析に利用しています（詳細は第6項）。
                   </li>
                   <li>
                     <strong>microCMS（株式会社microCMS）</strong>：ブログ記事の管理・配信。
@@ -123,18 +124,60 @@ export default function PrivacyPage() {
                 </ul>
 
                 <h2>6. Cookie・アクセス解析について</h2>
+                <p>
+                  当サイトは、利用状況の把握と改善のため、Google LLC が提供するアクセス解析ツール
+                  「Google アナリティクス 4（GA4）」を利用しています。GA4 は Cookie を用いて
+                  訪問者を区別し、次のような情報を統計的に収集します。個人を特定する情報は含みません。
+                </p>
                 <ul>
+                  <li>閲覧されたページ、滞在時間、サイト内の移動</li>
+                  <li>参照元（検索・リンク元など）</li>
+                  <li>おおよその地域（都道府県レベル）、端末・ブラウザの種類</li>
                   <li>
-                    当サイトは現在、アクセス解析・広告目的の Cookie を使用していません。
-                  </li>
-                  <li>
-                    Google アナリティクス（GA4）は<strong>現在無効</strong>です。
-                    今後有効化する場合は、本ポリシーを改定し、本ページで明示します。
-                  </li>
-                  <li>
-                    画面表示のフォント読み込みのため、Google Fonts（Google LLC）へ接続が発生します。
+                    ボタン操作（LINE・電話リンクのクリック、問い合わせフォームの送信）の発生回数
                   </li>
                 </ul>
+                <p>
+                  収集された情報は Google へ送信され、同社のサーバー（日本国外を含む）で処理されます。
+                  Google は GA4 において IP アドレスを記録・保存しません。データの取り扱いは
+                  {' '}
+                  <a
+                    href="https://policies.google.com/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google プライバシーポリシー
+                  </a>
+                  {' '}
+                  および
+                  {' '}
+                  <a
+                    href="https://support.google.com/analytics/answer/6004245"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google アナリティクスのデータ利用について
+                  </a>
+                  {' '}
+                  をご確認ください。
+                </p>
+                <p>
+                  計測を望まない場合は、ブラウザの設定で Cookie を無効化するか、
+                  {' '}
+                  <a
+                    href="https://tools.google.com/dlpage/gaoptout"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google アナリティクス オプトアウト アドオン
+                  </a>
+                  {' '}
+                  をご利用ください。無効化しても当サイトの閲覧・お問い合わせは可能です。
+                </p>
+                <p>
+                  広告配信・リターゲティング目的の Cookie は使用していません。
+                  このほか、画面表示のフォント読み込みのため Google Fonts（Google LLC）へ接続が発生します。
+                </p>
 
                 <h2>7. 開示・訂正・利用停止・削除のご請求</h2>
                 <p>
