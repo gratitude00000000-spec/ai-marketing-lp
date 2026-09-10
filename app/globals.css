@@ -218,6 +218,12 @@ img { max-width: 100%; display: block; }
 .f-submit { width: 100%; background: linear-gradient(135deg, var(--blue), var(--purple)); color: #fff; border: none; border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: .2s; font-family: inherit; letter-spacing: .04em; margin-top: 8px; }
 .f-submit:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(37, 99, 235, .4); }
 .f-note { text-align: center; font-size: 12px; color: rgba(255, 255, 255, .45); margin-top: 10px; }
+.f-note a { color: #93c5fd; }
+
+/* 同意チェック（お問い合わせフォーム） */
+.f-consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
+.f-consent input[type="checkbox"] { width: 18px; height: 18px; margin-top: 3px; flex-shrink: 0; accent-color: #2563eb; cursor: pointer; }
+.f-consent label { font-size: 13px; line-height: 1.7; color: rgba(255, 255, 255, .7); cursor: pointer; }
 .f-divider { display: flex; align-items: center; gap: 10px; margin: 18px 0 14px; }
 .f-divider::before, .f-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, .15); }
 .f-divider span { font-size: 12px; color: rgba(255, 255, 255, .45); white-space: nowrap; }

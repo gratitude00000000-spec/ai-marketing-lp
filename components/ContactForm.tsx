@@ -36,6 +36,9 @@ export function ContactForm() {
     // ハニーポットが埋まっていたら送信しない（bot）
     if (payload['bot-field']) return;
 
+    // 同意チェックは送信前の確認用。Netlify Forms へは送らない。
+    delete payload['privacy-agree'];
+
     setSubmitting(true);
     try {
       // POST 先は静的HTML（public/__forms.html）。Next.js の SSR 関数が
@@ -58,6 +61,19 @@ export function ContactForm() {
   return (
     <div className="form-card">
       <div className="form-card-title">まずはお気軽にご連絡ください</div>
+      <p className="f-note" style={{ marginTop: 0, marginBottom: 20, lineHeight: 1.7 }}>
+        ご入力内容は、お問い合わせ・ご相談への回答のために利用し、送信処理は Netlify Forms
+        を通じて行われます。詳しくは{' '}
+        <a
+          href="/privacy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#93c5fd', textDecoration: 'underline' }}
+        >
+          プライバシーポリシー
+        </a>
+        {' '}をご確認ください。
+      </p>
 
       <form
         name={FORM_NAME}
@@ -152,6 +168,22 @@ export function ContactForm() {
             placeholder="お気軽にご記入ください"
             className="f-textarea"
           />
+        </div>
+
+        <div className="f-consent">
+          <input type="checkbox" id="f-consent" name="privacy-agree" required />
+          <label htmlFor="f-consent">
+            <a
+              href="/privacy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#93c5fd', textDecoration: 'underline' }}
+            >
+              プライバシーポリシー
+            </a>
+            に同意して送信します
+            <span className="f-req">必須</span>
+          </label>
         </div>
 
         <button type="submit" className="f-submit" disabled={submitting}>

@@ -8,6 +8,7 @@ const FOOTER_LINKS = [
   { label: 'ブログ', href: '/blog/' },
   { label: '会社概要', href: '/about/' },
   { label: 'お問い合わせ', href: '/contact/' },
+  { label: 'プライバシーポリシー', href: '/privacy/' },
 ];
 
 export function SiteFooter() {
