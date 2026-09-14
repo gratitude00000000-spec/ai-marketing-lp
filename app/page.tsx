@@ -131,41 +131,51 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ═══ STATS BAR（地球の周りを4つの強みが回る演出）═══ */}
+      {/* ═══ STATS BAR（地球の周りを4つの強みが立体的に周回する演出）═══ */}
       <div className="stats-bar">
         <div className="wrap stats-orbit-wrap" data-anim="scale">
           <div className="stats-globe" aria-hidden="true">
-            <span className="globe-core" />
-            <span className="globe-meridian gm1" />
-            <span className="globe-meridian gm2" />
-            <span className="globe-meridian gm3" />
+            <span className="globe-land" />
+            <span className="globe-shade" />
           </div>
-          <span className="orbit-path" aria-hidden="true" />
-          <span className="orbit-spark sp1" aria-hidden="true" />
-          <span className="orbit-spark sp2" aria-hidden="true" />
-          <div className="stats-inner">
-            <div className="st-item">
-              <div className="st-item-inner">
-                <div className="st-num">全国</div>
-                <div className="st-txt">エリア・業種を問わず対応</div>
-              </div>
-            </div>
-            <div className="st-item">
-              <div className="st-item-inner">
-                <div className="st-num">AI対応</div>
-                <div className="st-txt">AIO / LLMO / AEO / MEO 総合支援</div>
-              </div>
-            </div>
-            <div className="st-item">
-              <div className="st-item-inner">
-                <div className="st-num">継続率</div>
-                <div className="st-txt">90%以上の高い継続率</div>
-              </div>
-            </div>
-            <div className="st-item">
-              <div className="st-item-inner">
-                <div className="st-num">安心</div>
-                <div className="st-txt">充実のサポート体制</div>
+          <div className="orbit-tilt">
+            <span className="orbit-path" aria-hidden="true" />
+            <div className="orbit-spin">
+              <span className="orbit-spark sp1" aria-hidden="true" />
+              <span className="orbit-spark sp2" aria-hidden="true" />
+              <div className="stats-inner">
+                <div className="st-item">
+                  <div className="st-item-radius">
+                    <div className="st-item-inner">
+                      <div className="st-num">全国</div>
+                      <div className="st-txt">エリア・業種を問わず対応</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="st-item">
+                  <div className="st-item-radius">
+                    <div className="st-item-inner">
+                      <div className="st-num">AI対応</div>
+                      <div className="st-txt">AIO / LLMO / AEO / MEO 総合支援</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="st-item">
+                  <div className="st-item-radius">
+                    <div className="st-item-inner">
+                      <div className="st-num">継続率</div>
+                      <div className="st-txt">90%以上の高い継続率</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="st-item">
+                  <div className="st-item-radius">
+                    <div className="st-item-inner">
+                      <div className="st-num">安心</div>
+                      <div className="st-txt">充実のサポート体制</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
