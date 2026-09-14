@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { GA4 } from '@/analytics/GA4';
+import { ScrollFx } from '@/components/ScrollFx';
 import { SITE } from '@/lib/site';
 
 const FONT_HREF =
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0d1f3c',
+  themeColor: '#15140F',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -63,7 +64,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href={FONT_HREF} />
         <GA4 />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ScrollFx />
+      </body>
     </html>
   );
 }

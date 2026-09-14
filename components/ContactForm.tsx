@@ -68,7 +68,7 @@ export function ContactForm() {
           href="/privacy/"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: '#93c5fd', textDecoration: 'underline' }}
+          style={{ color: 'var(--stamp-lt)', textDecoration: 'underline' }}
         >
           プライバシーポリシー
         </a>
@@ -177,7 +177,7 @@ export function ContactForm() {
               href="/privacy/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#93c5fd', textDecoration: 'underline' }}
+              style={{ color: 'var(--stamp-lt)', textDecoration: 'underline' }}
             >
               プライバシーポリシー
             </a>
@@ -190,7 +190,7 @@ export function ContactForm() {
           {submitting ? '送信中…' : '無料相談を申し込む →'}
         </button>
         {error && (
-          <p className="f-note" role="alert" style={{ color: '#fca5a5' }}>
+          <p className="f-note" role="alert" style={{ color: '#FF9E8F' }}>
             {error}
           </p>
         )}

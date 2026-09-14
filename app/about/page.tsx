@@ -153,7 +153,7 @@ export default function AboutPage() {
             <h2 className="sec-h2">提供サービス</h2>
             <div className="svc-list">
               {SERVICES.map((s) => (
-                <div className="svc-item" key={s.title}>
+                <div className="svc-item" key={s.title} data-anim="blur">
                   <div className="svc-icon" aria-hidden="true">
                     {s.icon}
                   </div>

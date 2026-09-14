@@ -3,6 +3,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { LineConsultBox } from '@/components/LineConsultBox';
+import { HeroPhone } from '@/components/HeroPhone';
 import { PLANS, HOME_FAQ } from '@/lib/site';
 import { organizationSchema, webSiteSchema, faqSchema, jsonLd } from '@/seo/jsonld';
 
@@ -43,6 +44,18 @@ const INDUSTRIES = [
   { img: '/19.jpg', title: 'その他・全業種対応', desc: 'エリア・業種を問わず全国対応。まずはご相談ください' },
 ];
 
+/** ヒーロー下の帯（装飾）。サイト内で使っている用語のみ。 */
+const TICKER_TERMS = [
+  'AIO',
+  'LLMO',
+  'AEO',
+  'MEO',
+  'GOOGLE BUSINESS PROFILE',
+  '口コミ返信',
+  '多言語対応',
+  '画像SEO',
+];
+
 export default function HomePage() {
   return (
     <>
@@ -54,72 +67,85 @@ export default function HomePage() {
       {/* ═══ HERO ═══ */}
       <section className="hero" id="top">
         <div className="wrap hero-grid">
-          <div className="hero-left-flex">
-            <div className="hero-left-text">
-              <div className="hero-logo-sm">
-                <span className="hero-logo-icon">
-                  <img src="/images/logo.png" alt="AI集客ドットコム ロゴ" />
-                </span>
-                <div>
-                  <div className="hero-logo-text">AI集客ドットコム</div>
-                  <div className="hero-logo-by">by 株式会社Gratitude</div>
-                </div>
+          <div className="hero-left-text">
+            <div className="hero-logo-sm">
+              <span className="hero-logo-icon">
+                <img src="/images/logo.png" alt="AI集客ドットコム ロゴ" />
+              </span>
+              <div>
+                <div className="hero-logo-text">AI集客ドットコム</div>
+                <div className="hero-logo-by">by 株式会社Gratitude</div>
               </div>
-              <span className="ey ey-w">全国・全業種対応 / AI時代の集客支援</span>
-              <h1>
-                <span className="nowrap">
-                  <span className="ac">AI</span>に選ばれる時代の
-                </span>
-                <br />
-                集客設計を、
-                <br />
-                <span className="nowrap">
-                  <span className="brand">AI集客ドットコム</span>が
-                </span>
-                <br />
-                支援します。
-              </h1>
-              <p className="lead">
-                GoogleのAI検索（AIO）やChatGPT（LLMO）に引用される時代、ただ検索に出るだけでは集客できません。GBPの最適化はもちろん、AIO・LLMO・AEO・MEOまで見据えた情報設計で、「見つかり方」と「選ばれ方」を根本から整えます。
-              </p>
-              <div className="btn-row">
-                <a
-                  className="btn btn-line"
-                  href="https://lin.ee/oJUbunU"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LINEで相談する
-                </a>
-                <a className="btn btn-gold" href="tel:0989755682">
-                  電話で相談する
-                </a>
-              </div>
-              <div className="hero-badges" />
             </div>
-            <div className="hero-left-logo">
-              <img src="/images/logo.png" alt="AI集客ドットコム" />
+            <span className="ey ey-w">全国・全業種対応 / AI時代の集客支援</span>
+            <h1>
+              <span className="nowrap">
+                <span className="ac">AI</span>に選ばれる時代の
+              </span>
+              <br />
+              集客設計を、
+              <br />
+              <span className="nowrap">
+                <span className="brand">AI集客ドットコム</span>が
+              </span>
+              <br />
+              支援します。
+            </h1>
+            <p className="lead">
+              GoogleのAI検索（AIO）やChatGPT（LLMO）に引用される時代、ただ検索に出るだけでは集客できません。GBPの最適化はもちろん、AIO・LLMO・AEO・MEOまで見据えた情報設計で、「見つかり方」と「選ばれ方」を根本から整えます。
+            </p>
+            <div className="btn-row">
+              <a
+                className="btn btn-line"
+                href="https://lin.ee/oJUbunU"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LINEで相談する
+              </a>
+              <a className="btn btn-gold" href="tel:0989755682">
+                電話で相談する
+              </a>
             </div>
           </div>
+
+          <HeroPhone />
         </div>
       </section>
+
+      {/* ═══ TICKER（装飾）═══ */}
+      <div className="ticker" aria-hidden="true">
+        <div className="ticker-track">
+          {[0, 1].map((dup) => (
+            <span key={dup}>
+              {TICKER_TERMS.map((t) => (
+                <span key={t}>
+                  <i>✦</i>
+                  {t}
+                </span>
+              ))}
+              <i>✦</i>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* ═══ STATS BAR ═══ */}
       <div className="stats-bar">
         <div className="wrap stats-inner">
-          <div className="st-item">
+          <div className="st-item" data-anim="up">
             <div className="st-num">全国</div>
             <div className="st-txt">エリア・業種を問わず対応</div>
           </div>
-          <div className="st-item">
+          <div className="st-item" data-anim="up">
             <div className="st-num">AI対応</div>
             <div className="st-txt">AIO / LLMO / AEO / MEO 総合支援</div>
           </div>
-          <div className="st-item">
+          <div className="st-item" data-anim="up">
             <div className="st-num">継続率</div>
             <div className="st-txt">90%以上の高い継続率</div>
           </div>
-          <div className="st-item">
+          <div className="st-item" data-anim="up">
             <div className="st-num">安心</div>
             <div className="st-txt">充実のサポート体制</div>
           </div>
@@ -129,16 +155,23 @@ export default function HomePage() {
       {/* ═══ SERVICES ═══ */}
       <section className="sec svc-section" id="services">
         <div className="wrap">
-          <span className="ey ey-b">サービス内容</span>
-          <h2 className="sec-h2">
-            投稿代行ではなく、
-            <br />
-            <span className="accent">集客全体のシナジー</span>まで設計します。
-          </h2>
-          <p className="sec-lead">GBP運用、HP、SNS連携による相乗効果UPを支援。</p>
+          <div data-anim="up">
+            <span className="ey ey-b">サービス内容</span>
+            <h2 className="sec-h2">
+              投稿代行ではなく、
+              <br />
+              <span className="accent">集客全体のシナジー</span>まで設計します。
+            </h2>
+            <p className="sec-lead">GBP運用、HP、SNS連携による相乗効果UPを支援。</p>
+          </div>
           <div className="svc-grid">
-            {SERVICES.map((s) => (
-              <div className="svc-card" key={s.title}>
+            {SERVICES.map((s, i) => (
+              <div
+                className="svc-card"
+                key={s.title}
+                data-anim="blur"
+                data-idx={String(i + 1).padStart(2, '0')}
+              >
                 <div className="svc-img">
                   <img loading="lazy" src={s.img} alt={s.title} />
                 </div>
@@ -158,20 +191,22 @@ export default function HomePage() {
       </section>
 
       {/* ═══ INDUSTRIES ═══ */}
-      <section className="sec" id="industries" style={{ background: '#fff' }}>
+      <section className="sec" id="industries">
         <div className="wrap">
-          <span className="ey ey-b">対応業種・利用シーン</span>
-          <h2 className="sec-h2">
-            飲食・美容・医療・ナイト業界など、
-            <br />
-            全業種に対応しています。
-          </h2>
-          <p className="sec-lead">
-            AI検索・MEO対策は特定の業種だけのものではありません。どの業種でも集客に直結します。
-          </p>
+          <div data-anim="up">
+            <span className="ey ey-b">対応業種・利用シーン</span>
+            <h2 className="sec-h2">
+              飲食・美容・医療・ナイト業界など、
+              <br />
+              全業種に対応しています。
+            </h2>
+            <p className="sec-lead">
+              AI検索・MEO対策は特定の業種だけのものではありません。どの業種でも集客に直結します。
+            </p>
+          </div>
           <div className="ind-grid">
             {INDUSTRIES.map((ind) => (
-              <div className="ind-card" key={ind.title}>
+              <div className="ind-card" key={ind.title} data-anim="blur">
                 <img loading="lazy" src={ind.img} alt={ind.title} />
                 <div className="ind-ov" />
                 <div className="ind-ct">
@@ -187,17 +222,19 @@ export default function HomePage() {
       {/* ═══ PRICING ═══ */}
       <section className="sec pricing-sec" id="plans">
         <div className="wrap">
-          <span className="ey ey-b">料金プラン</span>
-          <h2 className="sec-h2">事業フェーズに合わせて選べるプラン</h2>
-          <p className="sec-lead">
-            まずは運用を整えたい方から、AI時代を見据えて全体最適を進めたい方まで対応します。
-          </p>
-          <div className="plan-note">
-            ※「月〇回投稿」とは、Googleビジネスプロフィールの最新情報・イベント更新など、日々の集客最適化のための更新回数です。
+          <div data-anim="up">
+            <span className="ey ey-b">料金プラン</span>
+            <h2 className="sec-h2">事業フェーズに合わせて選べるプラン</h2>
+            <p className="sec-lead">
+              まずは運用を整えたい方から、AI時代を見据えて全体最適を進めたい方まで対応します。
+            </p>
+            <div className="plan-note">
+              ※「月〇回投稿」とは、Googleビジネスプロフィールの最新情報・イベント更新など、日々の集客最適化のための更新回数です。
+            </div>
           </div>
           <div className="plans">
             {PLANS.map((plan) => (
-              <div className={`plan${plan.featured ? ' feat' : ''}`} key={plan.name}>
+              <div className={`plan${plan.featured ? ' feat' : ''}`} key={plan.name} data-anim="blur">
                 {plan.featured && <div className="plan-badge">おすすめ</div>}
                 <div className="plan-ico">
                   <img loading="lazy" src={plan.icon} alt={plan.name} />
@@ -206,7 +243,7 @@ export default function HomePage() {
                 <div className="plan-price">
                   {plan.price} {plan.priceSmall && <small>{plan.priceSmall}</small>}
                 </div>
-                <div className="plan-tax">{plan.tax ?? ' '}</div>
+                <div className="plan-tax">{plan.tax ?? ' '}</div>
                 <p className="plan-desc">{plan.desc}</p>
                 <ul className="plan-feats">
                   {plan.feats.map((f) => (
@@ -220,10 +257,12 @@ export default function HomePage() {
       </section>
 
       {/* ═══ FAQ ═══ */}
-      <section className="sec" id="faq" style={{ background: '#fff' }}>
+      <section className="sec" id="faq">
         <div className="wrap">
-          <span className="ey ey-b">Q&amp;A</span>
-          <h2 className="sec-h2 tight">よくある質問</h2>
+          <div data-anim="up">
+            <span className="ey ey-b">Q&amp;A</span>
+            <h2 className="sec-h2 tight">よくある質問</h2>
+          </div>
           <FaqAccordion items={HOME_FAQ} />
         </div>
       </section>
@@ -232,23 +271,25 @@ export default function HomePage() {
       <section className="cta-sec" id="contact">
         <div className="wrap cta-grid">
           <div className="cta-left">
-            <span className="ey ey-w">お問い合わせ</span>
-            <h2>
-              AIに選ばれる時代の集客を、
-              <br />
-              今のうちに整えませんか？
-            </h2>
-            <p>
-              現在AIに選ばれる時代に突入しています。目まぐるしく変わるこの時代を追い続けるのは簡単ではありません。だからこそ、株式会社Gratitudeにお任せください。
-            </p>
+            <div data-anim="up">
+              <span className="ey ey-w">お問い合わせ</span>
+              <h2>
+                AIに選ばれる時代の集客を、
+                <br />
+                今のうちに整えませんか？
+              </h2>
+              <p>
+                現在AIに選ばれる時代に突入しています。目まぐるしく変わるこの時代を追い続けるのは簡単ではありません。だからこそ、株式会社Gratitudeにお任せください。
+              </p>
+            </div>
             <div className="trust-grid">
-              <div className="trust-item">
+              <div className="trust-item" data-anim="blur">
                 <div className="trust-ico">
                   <img loading="lazy" src="/11.jpg" alt="全国対応" />
                 </div>
                 <div className="trust-txt">全国対応</div>
               </div>
-              <div className="trust-item">
+              <div className="trust-item" data-anim="blur">
                 <div className="trust-ico">
                   <img loading="lazy" src="/12.jpg" alt="継続率" />
                 </div>
@@ -258,7 +299,7 @@ export default function HomePage() {
                   90%以上
                 </div>
               </div>
-              <div className="trust-item">
+              <div className="trust-item" data-anim="blur">
                 <div className="trust-ico">
                   <img loading="lazy" src="/13.jpg" alt="安心のサポート体制" />
                 </div>
@@ -271,7 +312,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div>
+          <div data-anim="scale">
             <LineConsultBox />
           </div>
         </div>
