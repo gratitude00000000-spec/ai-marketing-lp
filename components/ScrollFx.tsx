@@ -49,7 +49,7 @@ export function ScrollFx() {
 
     // 画面外に出た装飾アニメーション（ヒーロー・帯）は止めて負荷を抑える
     const loopHosts = Array.from(
-      document.querySelectorAll<HTMLElement>('.hero-visual, .ticker, .ind-marquee-wrap'),
+      document.querySelectorAll<HTMLElement>('.hero-visual, .ticker, .ind-marquee-wrap, .stats-orbit-wrap'),
     );
     let loopIo: IntersectionObserver | undefined;
     if (loopHosts.length > 0) {

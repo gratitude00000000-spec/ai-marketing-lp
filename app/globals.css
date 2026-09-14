@@ -215,12 +215,81 @@ img { max-width: 100%; display: block; }
 .ticker-track i { color: var(--stamp); font-style: normal; margin: 0 26px; }
 @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ════════════════ STATS BAR ════════════════ */
-.stats-bar { background: var(--surface2); padding: 26px 0; border-bottom: 1px solid var(--rule); }
-.stats-inner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
+/* ════════════════ STATS BAR（地球の周りを強みが周回）════════════════
+   モバイルは可読性優先で静止した帯（従来どおりの横並び）。
+   760px 以上でのみ、中心の地球の周りを4項目が円軌道で周回する演出にする。
+   周回自体は .st-item（0サイズの軸・rotate アニメで位置だけ回す）、
+   中身の向きは .st-item-inner が逆回転して常に正立を保つ定番手法。 */
+.stats-bar { background: var(--surface2); padding: 26px 0; border-bottom: 1px solid var(--rule); overflow: hidden; }
+.stats-orbit-wrap { position: relative; }
+.stats-inner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; position: relative; z-index: 2; }
 .st-item { text-align: center; }
+.st-item-inner {}
 .st-num { font-size: 30px; font-weight: 900; color: var(--stamp-lt); font-family: "Shippori Mincho", serif; line-height: 1; }
 .st-txt { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* 地球（装飾）。モバイルでは通常フローで帯の上に静置し、常にゆっくり自転させる */
+.stats-globe {
+  position: relative; margin: 0 auto 16px; z-index: 1;
+  width: 54px; height: 54px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 34% 30%, var(--stamp-lt), var(--stamp) 45%, var(--stamp-deep) 78%);
+  box-shadow: 0 0 30px 4px rgba(213, 67, 42, .3), inset -8px -8px 16px rgba(0, 0, 0, .5), inset 6px 6px 14px rgba(240, 117, 92, .3);
+}
+.globe-meridian { position: absolute; inset: 6%; border-radius: 50%; border: 1px solid rgba(239, 234, 219, .32); }
+.globe-meridian.gm1 { scale: .34 1; animation: meridianSpin 9s linear infinite; }
+.globe-meridian.gm2 { scale: .34 1; rotate: 60deg; animation: meridianSpin 12s linear infinite reverse; }
+.globe-meridian.gm3 { scale: 1 .34; animation: meridianSpin 16s linear infinite; }
+@keyframes meridianSpin { from { rotate: 0deg; } to { rotate: 360deg; } }
+
+.orbit-path, .orbit-spark { display: none; }
+
+@media (min-width: 761px) {
+  .stats-bar { padding: 64px 0 56px; }
+  .stats-orbit-wrap { min-height: 380px; display: flex; align-items: center; justify-content: center; }
+
+  .stats-globe {
+    position: absolute; top: 50%; left: 50%; translate: -50% -50%; margin: 0; width: 116px; height: 116px;
+    box-shadow: 0 0 60px 10px rgba(213, 67, 42, .28), inset -14px -14px 28px rgba(0, 0, 0, .5), inset 10px 10px 22px rgba(240, 117, 92, .28);
+  }
+
+  .orbit-path {
+    display: block; position: absolute; top: 50%; left: 50%; translate: -50% -50%; z-index: 1;
+    width: 320px; height: 320px; border-radius: 50%; border: 1px dashed rgba(239, 234, 219, .16);
+  }
+  .orbit-spark {
+    display: block; position: absolute; top: 50%; left: 50%; width: 0; height: 0; z-index: 1;
+    animation: orbitRotate 12s linear infinite;
+  }
+  .orbit-spark::before {
+    content: ""; position: absolute; left: 0; top: -160px; translate: -50% -50%;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--stamp-lt);
+    box-shadow: 0 0 12px 3px rgba(240, 117, 92, .7);
+  }
+  .orbit-spark.sp2 { animation-duration: 17s; animation-direction: reverse; }
+  .orbit-spark.sp2::before { width: 5px; height: 5px; opacity: .7; }
+
+  .stats-inner { display: block; }
+  .st-item {
+    position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+    animation: orbitRotate 40s linear infinite;
+  }
+  .st-item:nth-child(1) { animation-delay: 0s; }
+  .st-item:nth-child(2) { animation-delay: -10s; }
+  .st-item:nth-child(3) { animation-delay: -20s; }
+  .st-item:nth-child(4) { animation-delay: -30s; }
+  .st-item-inner {
+    position: absolute; left: 0; top: -160px; translate: -50% -50%;
+    width: 156px; padding: 12px 14px; border-radius: 16px;
+    background: rgba(38, 35, 22, .82); border: 1px solid var(--rule); backdrop-filter: blur(6px);
+    box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .7);
+    animation: orbitCounter 40s linear infinite; animation-delay: inherit;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .stats-orbit-wrap:hover .st-item, .stats-orbit-wrap:hover .st-item-inner { animation-play-state: paused; }
+  .st-item-inner:hover { border-color: var(--stamp); background: rgba(38, 35, 22, .96); }
+}
+@keyframes orbitRotate { from { rotate: 0deg; } to { rotate: 360deg; } }
+@keyframes orbitCounter { from { rotate: 0deg; } to { rotate: -360deg; } }
 
 /* ════════════════ SECTION HEADINGS ════════════════ */
 .sec-h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; color: var(--ink-strong); margin: 14px 0 10px; }
@@ -522,9 +591,6 @@ html.js-anim .svc-grid   > *:nth-child(2) { transition-delay: 110ms; }
 html.js-anim .svc-grid   > *:nth-child(3) { transition-delay: 220ms; }
 html.js-anim .plans      > *:nth-child(2) { transition-delay: 100ms; }
 html.js-anim .plans      > *:nth-child(3) { transition-delay: 200ms; }
-html.js-anim .stats-inner > *:nth-child(2) { transition-delay: 70ms; }
-html.js-anim .stats-inner > *:nth-child(3) { transition-delay: 140ms; }
-html.js-anim .stats-inner > *:nth-child(4) { transition-delay: 210ms; }
 html.js-anim .trust-grid > *:nth-child(2) { transition-delay: 90ms; }
 html.js-anim .trust-grid > *:nth-child(3) { transition-delay: 180ms; }
 html.js-anim .blog-grid  > *:nth-child(2) { transition-delay: 100ms; }
