@@ -508,13 +508,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* ════════════════ RESPONSIVE ════════════════ */
 @media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-  /* スマホでは見出し・リード・CTA を先に出す（ファーストビュー優先）。
-     装飾のスマホモックアップはその下に置く。 */
-  .hero-visual { min-height: 0; padding: 8px 0 4px; }
+  /* ヘッダーだけ先にハンバーガーへ切り替える。ヒーローは 760px まで
+     テキスト＋スマホの横並びを維持する（下の 760px クエリ参照）。 */
   .hd-nav { display: none; }
   .hd-cta { display: none; }
   .mob-ham { display: flex; margin-right: 4px; }
+  .hero-grid { gap: 32px; }
+  .phone-mock { width: min(210px, 30vw); }
   .prob-grid, .svc-grid, .ind-grid, .plans, .cta-grid, .contact-grid, .svc-list { grid-template-columns: 1fr; }
   .plan:nth-child(1), .plan:nth-child(2) { rotate: 0deg; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
@@ -523,6 +523,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .about-table th { width: 120px; min-width: 100px; }
   .mission-box { padding: 36px 24px; }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+  /* ここから先で初めてヒーローを縦積みにする（見出し・リード・CTA が先、
+     スマホモックアップはその下）。960〜760px の間はテキストとスマホを
+     横並びのまま保つことで、見出しの下が不自然に空くのを防ぐ。 */
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-visual { min-height: 0; padding: 8px 0 4px; }
+  .phone-mock { width: min(230px, 62vw); }
 }
 @media (max-width: 600px) {
   .hero { padding: 56px 0 44px; }
