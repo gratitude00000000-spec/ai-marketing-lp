@@ -244,15 +244,53 @@ img { max-width: 100%; display: block; }
 .ck li { font-size: 13px; padding-left: 22px; position: relative; list-style: none; color: var(--ink); }
 .ck li::before { content: '✓'; position: absolute; left: 0; color: var(--stamp-lt); font-weight: 800; }
 
-/* ════════════════ INDUSTRIES ════════════════ */
-.ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-.ind-card { border-radius: var(--r); overflow: hidden; position: relative; height: 190px; display: flex; align-items: flex-end; box-shadow: var(--sh); border: 1px solid var(--rule); transition: scale .3s var(--ease), box-shadow .3s ease, border-color .3s ease; cursor: default; }
-.ind-card:hover { scale: 1.025; box-shadow: var(--sh2); border-color: var(--stamp); }
-.ind-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ind-ov { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12, 11, 8, .94) 0%, rgba(12, 11, 8, .45) 58%, rgba(12, 11, 8, .12) 100%); }
-.ind-ct { position: relative; z-index: 1; padding: 14px 16px; width: 100%; }
-.ind-ct h3 { font-size: 16px; font-weight: 700; color: var(--ink-strong); margin-bottom: 3px; }
-.ind-ct p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+/* ════════════════ INDUSTRIES — 3D画像マルキー ════════════════
+   縦長カードを右→左へ一定速度・切れ目なくループ。実体は2巡分のカードを
+   並べて -50% まで translateX するだけの標準的なシームレスマーキー。 */
+.ind-marquee-wrap {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 48px;
+  padding: 56px 0 64px;
+  overflow: hidden;
+}
+.ind-marquee-fade { position: absolute; top: 0; bottom: 0; width: 12%; z-index: 3; pointer-events: none; }
+.ind-marquee-fade-l { left: 0; background: linear-gradient(90deg, var(--ground), transparent); }
+.ind-marquee-fade-r { right: 0; background: linear-gradient(-90deg, var(--ground), transparent); }
+
+.ind-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding-left: 8vw;
+  animation: indMarquee 32s linear infinite;
+}
+@keyframes indMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.ind-card-3d {
+  position: relative;
+  flex: none;
+  width: 230px;
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-left: -70px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 30px 56px -20px rgba(0, 0, 0, .65);
+  transform: perspective(900px) rotateY(-14deg);
+  transition: transform .4s var(--ease), z-index 0s;
+}
+.ind-marquee-track > .ind-card-3d:first-child { margin-left: 0; }
+/* 偶数・奇数で角度とずらしを反転（何巡しても継ぎ目なく揃う） */
+.ind-card-3d:nth-child(even) { transform: perspective(900px) rotateY(-14deg) rotate(-2.5deg) translateY(14px); }
+.ind-card-3d:nth-child(odd)  { transform: perspective(900px) rotateY(-14deg) rotate(2deg) translateY(-10px); }
+.ind-card-3d:hover { transform: perspective(900px) rotateY(0deg) rotate(0deg) translateY(-6px) scale(1.04); z-index: 5; }
+.ind-card-3d img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ind-card-3d-ov { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(12, 11, 8, .94) 0%, rgba(12, 11, 8, .4) 55%, rgba(12, 11, 8, .05) 100%); }
+.ind-card-3d-ct { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 18px; }
+.ind-card-3d-ct h3 { font-size: 14.5px; font-weight: 700; color: var(--ink-strong); margin-bottom: 4px; line-height: 1.4; }
+.ind-card-3d-ct p { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
 /* ════════════════ PRICING ════════════════ */
 .pricing-sec { background: var(--surface); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
@@ -482,11 +520,6 @@ html.js-anim [data-anim].is-in { opacity: 1; transform: none; filter: none; }
 /* グループ内の時間差（スタガー） */
 html.js-anim .svc-grid   > *:nth-child(2) { transition-delay: 110ms; }
 html.js-anim .svc-grid   > *:nth-child(3) { transition-delay: 220ms; }
-html.js-anim .ind-grid   > *:nth-child(2) { transition-delay: 70ms; }
-html.js-anim .ind-grid   > *:nth-child(3) { transition-delay: 140ms; }
-html.js-anim .ind-grid   > *:nth-child(4) { transition-delay: 210ms; }
-html.js-anim .ind-grid   > *:nth-child(5) { transition-delay: 280ms; }
-html.js-anim .ind-grid   > *:nth-child(6) { transition-delay: 350ms; }
 html.js-anim .plans      > *:nth-child(2) { transition-delay: 100ms; }
 html.js-anim .plans      > *:nth-child(3) { transition-delay: 200ms; }
 html.js-anim .stats-inner > *:nth-child(2) { transition-delay: 70ms; }
@@ -515,7 +548,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .mob-ham { display: flex; margin-right: 4px; }
   .hero-grid { gap: 32px; }
   .phone-mock { width: min(210px, 30vw); }
-  .prob-grid, .svc-grid, .ind-grid, .plans, .cta-grid, .contact-grid, .svc-list { grid-template-columns: 1fr; }
+  .prob-grid, .svc-grid, .plans, .cta-grid, .contact-grid, .svc-list { grid-template-columns: 1fr; }
   .plan:nth-child(1), .plan:nth-child(2) { rotate: 0deg; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .sec { padding: 64px 0; }
@@ -523,6 +556,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .about-table th { width: 120px; min-width: 100px; }
   .mission-box { padding: 36px 24px; }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .ind-card-3d { width: 190px; margin-left: -56px; }
+  .ind-marquee-track { animation-duration: 26s; }
 }
 @media (max-width: 760px) {
   /* ここから先で初めてヒーローを縦積みにする（見出し・リード・CTA が先、
@@ -534,7 +569,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 @media (max-width: 600px) {
   .hero { padding: 56px 0 44px; }
-  .ind-grid { grid-template-columns: repeat(2, 1fr); }
   .blog-grid { grid-template-columns: 1fr; }
   .trust-row { grid-template-columns: 1fr 1fr; }
   /* スマホでは周辺の浮遊要素を出さない（本体の可読性を優先） */
@@ -542,4 +576,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .phone-mock { width: min(186px, 54vw); }
   .seal-badge { width: 56px; height: 56px; top: -12px; right: -10px; padding: 8px; }
   .mission-box { padding: 28px 20px; }
+  .ind-card-3d { width: 148px; margin-left: -42px; border-radius: 14px; }
+  .ind-card-3d-ct { padding: 12px 13px; }
+  .ind-card-3d-ct h3 { font-size: 12.5px; }
+  .ind-card-3d-ct p { font-size: 10px; }
+  .ind-marquee-wrap { padding: 40px 0 48px; margin-top: 32px; }
+  .ind-marquee-track { animation-duration: 22s; }
 }

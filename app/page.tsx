@@ -4,6 +4,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { LineConsultBox } from '@/components/LineConsultBox';
 import { HeroPhone } from '@/components/HeroPhone';
+import { IndustryMarquee } from '@/components/IndustryMarquee';
 import { PLANS, HOME_FAQ } from '@/lib/site';
 import { organizationSchema, webSiteSchema, faqSchema, jsonLd } from '@/seo/jsonld';
 
@@ -191,7 +192,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ INDUSTRIES ═══ */}
-      <section className="sec" id="industries">
+      <section className="sec ind-sec" id="industries">
         <div className="wrap">
           <div data-anim="up">
             <span className="ey ey-b">対応業種・利用シーン</span>
@@ -204,18 +205,9 @@ export default function HomePage() {
               AI検索・MEO対策は特定の業種だけのものではありません。どの業種でも集客に直結します。
             </p>
           </div>
-          <div className="ind-grid">
-            {INDUSTRIES.map((ind) => (
-              <div className="ind-card" key={ind.title} data-anim="blur">
-                <img loading="lazy" src={ind.img} alt={ind.title} />
-                <div className="ind-ov" />
-                <div className="ind-ct">
-                  <h3>{ind.title}</h3>
-                  <p>{ind.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        </div>
+        <div data-anim="scale">
+          <IndustryMarquee items={INDUSTRIES} />
         </div>
       </section>
 
