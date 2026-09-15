@@ -129,7 +129,6 @@ export default function AboutPage() {
                     <li>飲食事業・パーティー会場運営</li>
                     <li>グルメサイト運営</li>
                     <li>Webマーケティング（AI集客・SEO・MEO・GBP運用代行）</li>
-                    <li>人材採用コンサルティング</li>
                   </ul>
                 </td>
               </tr>
