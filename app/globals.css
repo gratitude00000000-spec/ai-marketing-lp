@@ -216,49 +216,45 @@ img { max-width: 100%; display: block; }
 @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ════════════════ STATS BAR（地球の周りを強みが立体的に周回）════════════════
-   モバイルは可読性優先で静止した帯（従来どおりの横並び）。
-   760px 以上でのみ、中心の地球の周りを4項目が実際に奥行きを持った楕円軌道
-   （perspective + rotateY(角度) translateZ(半径)）で周回する。後ろ半分では
-   スケール・不透明度を落としつつ z-index を切り替え、地球の裏へ回り込んで
-   隠れるように見せる。文字の向きは .st-item-inner の逆回転アニメで
-   常にカメラ正面（正立）を保つ、3Dカルーセルの定番「ビルボード」手法。 */
-.stats-bar { background: var(--surface2); padding: 26px 0; border-bottom: 1px solid var(--rule); overflow: hidden; }
-.stats-orbit-wrap { position: relative; }
-.stats-inner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; position: relative; z-index: 2; }
-.st-item { text-align: center; }
-.st-item-inner {}
-.st-num { font-size: 30px; font-weight: 900; color: var(--stamp-lt); font-family: "Shippori Mincho", serif; line-height: 1; }
-.st-txt { font-size: 12px; color: var(--muted); margin-top: 4px; }
+   スマホを含む全幅で、中心の地球の周りを4項目が実際に奥行きを持った
+   楕円軌道（perspective + rotateY(角度) translateZ(半径)）で周回する。
+   後ろ半分ではスケール・不透明度を落としつつ z-index を切り替え、地球の
+   裏へ回り込んで隠れるように見せる。文字の向きは2段階の逆回転
+   （.st-item-face が周回のY軸、.st-item-inner が軌道面の傾きX軸）で
+   常にカメラ正面（正立）を保つ、3Dカルーセルの定番「ビルボード」手法。
+   半径・サイズはスマホ用に小さく、761px以上で大きい値に差し替える。 */
+.stats-bar { background: var(--surface2); padding: 48px 0 40px; border-bottom: 1px solid var(--rule); overflow: hidden; }
+.stats-orbit-wrap { position: relative; min-height: 280px; display: flex; align-items: center; justify-content: center; perspective: 900px; }
 
 /* 地球（装飾）。海の球体に大陸・雲・極冠・陰影を重ね、よりリアルな
    地球風の見た目にする。大陸と雲は横スクロールで自転して見える
    （雲は大陸と別速度にすることで視差が出て奥行きを感じさせる）。 */
 .stats-globe {
-  position: relative; margin: 0 auto 16px; z-index: 1;
-  width: 54px; height: 54px; border-radius: 50%; overflow: hidden; pointer-events: none;
+  position: absolute; top: 50%; left: 50%; translate: -50% -50%; z-index: 1;
+  width: 74px; height: 74px; border-radius: 50%; overflow: hidden; pointer-events: none;
   background: radial-gradient(circle at 32% 30%, #2f7fc0 0%, #1f6aa8 40%, #124a80 68%, #082b52 90%, #051c38 100%);
-  box-shadow: 0 0 22px 3px rgba(70, 150, 230, .35), inset -9px -9px 16px rgba(0, 0, 0, .55), inset 7px 7px 14px rgba(140, 205, 255, .3);
+  box-shadow: 0 0 30px 5px rgba(70, 150, 230, .32), inset -11px -11px 20px rgba(0, 0, 0, .55), inset 8px 8px 16px rgba(140, 205, 255, .28);
 }
 .globe-land {
   position: absolute; inset: -15% -70%; background-repeat: repeat-x; background-size: 200% 100%;
   background-image:
-    /* 大陸本体（輪郭を少し締めて、ぼやけた斑ではなく塊に見せる） */
-    radial-gradient(ellipse 15% 24% at 8% 40%, #5aa864 0%, #5aa864 45%, transparent 82%),
-    radial-gradient(ellipse 11% 32% at 15% 62%, #4c9a5b 0%, #4c9a5b 40%, transparent 84%),
-    radial-gradient(ellipse 23% 28% at 34% 54%, #4f9a58 0%, #4f9a58 42%, transparent 80%),
-    radial-gradient(ellipse 13% 20% at 40% 74%, #3f7a48 0%, #3f7a48 40%, transparent 82%),
-    radial-gradient(ellipse 21% 22% at 63% 45%, #b79a5e 0%, #b79a5e 38%, transparent 80%),
-    radial-gradient(ellipse 15% 26% at 71% 68%, #4c9a5b 0%, #4c9a5b 42%, transparent 84%),
-    radial-gradient(ellipse 18% 18% at 87% 30%, #5aa864 0%, #5aa864 42%, transparent 82%),
-    radial-gradient(ellipse 14% 24% at 93% 63%, #3f7a48 0%, #3f7a48 40%, transparent 84%),
+    /* 大陸本体（色の変化点を急にして、輪郭のくっきりした塊に見せる） */
+    radial-gradient(ellipse 15% 24% at 8% 40%, #63b06d 0%, #5aa864 58%, transparent 68%),
+    radial-gradient(ellipse 11% 32% at 15% 62%, #56a561 0%, #4c9a5b 58%, transparent 68%),
+    radial-gradient(ellipse 23% 28% at 34% 54%, #58a862 0%, #4f9a58 58%, transparent 68%),
+    radial-gradient(ellipse 13% 20% at 40% 74%, #488350 0%, #3f7a48 58%, transparent 68%),
+    radial-gradient(ellipse 21% 22% at 63% 45%, #c4a768 0%, #b79a5e 56%, transparent 66%),
+    radial-gradient(ellipse 15% 26% at 71% 68%, #56a561 0%, #4c9a5b 58%, transparent 68%),
+    radial-gradient(ellipse 18% 18% at 87% 30%, #63b06d 0%, #5aa864 58%, transparent 68%),
+    radial-gradient(ellipse 14% 24% at 93% 63%, #488350 0%, #3f7a48 58%, transparent 68%),
     /* 砂漠・山脈などの濃淡（大陸の内側に小さく重ねて質感を出す） */
-    radial-gradient(ellipse 8% 8% at 31% 26%, #a68a54 0%, transparent 78%),
-    radial-gradient(ellipse 9% 9% at 59% 22%, #6a5a3a 0%, transparent 78%),
-    radial-gradient(ellipse 7% 12% at 12% 44%, #2f5c38 0%, transparent 80%),
-    radial-gradient(ellipse 7% 12% at 65% 48%, #2f5c38 0%, transparent 80%),
-    radial-gradient(ellipse 6% 9% at 90% 33%, #7a6a3e 0%, transparent 78%);
+    radial-gradient(ellipse 8% 8% at 31% 26%, #a68a54 0%, transparent 74%),
+    radial-gradient(ellipse 9% 9% at 59% 22%, #6a5a3a 0%, transparent 74%),
+    radial-gradient(ellipse 7% 12% at 12% 44%, #2f5c38 0%, transparent 76%),
+    radial-gradient(ellipse 7% 12% at 65% 48%, #2f5c38 0%, transparent 76%),
+    radial-gradient(ellipse 6% 9% at 90% 33%, #7a6a3e 0%, transparent 74%);
   animation: globeSpinTex 18s linear infinite;
-  opacity: .95;
+  opacity: .97;
 }
 .globe-clouds {
   position: absolute; inset: -20% -80%; background-repeat: repeat-x; background-size: 200% 100%;
@@ -281,87 +277,98 @@ img { max-width: 100%; display: block; }
 .globe-shade {
   position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
   background:
-    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .45), transparent 46%),
-    radial-gradient(circle at 76% 80%, rgba(0, 0, 0, .6), transparent 56%);
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .4), transparent 46%),
+    radial-gradient(circle at 76% 80%, rgba(0, 0, 0, .55), transparent 56%);
   box-shadow: inset 0 0 10px 2px rgba(140, 205, 255, .3);
 }
 @keyframes globeSpinTex { from { background-position: 0% 0; } to { background-position: -100% 0; } }
 
-/* .orbit-tilt / .orbit-spin は実テキスト(.stats-inner)も内包するため、
-   モバイルでは3D演出だけを無効化する透過コンテナとして扱う（非表示にしない）。
-   完全に装飾のみの要素（軌道リング・光点）だけを隠す。 */
-.orbit-path, .orbit-spark { display: none; }
+/* 軌道面を傾ける静的な層（傘）と、その中で回り続ける層を分ける。
+   2段構成にすることで「傾いた円をY軸でくるくる回す」立体軌道になる。
+   0サイズの「軸」にする（inset:0 で帯全体を覆う大きな面を回すと、
+   周辺部が視点に近づきすぎて描画が破綻するため）。 */
+.orbit-tilt {
+  position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+  transform-style: preserve-3d; rotate: x 62deg;
+}
+.orbit-spin {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d;
+  animation: orbitSpinY 42s linear infinite;
+}
+
+.orbit-path {
+  position: absolute; top: 50%; left: 50%; translate: -50% -50%; z-index: 1;
+  width: 190px; height: 190px; border-radius: 50%; border: 1px dashed rgba(239, 234, 219, .18);
+}
+.orbit-spark {
+  position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+  animation: orbitSpinY 12s linear infinite;
+}
+.orbit-spark.sp2 { animation-duration: 17s; animation-direction: reverse; }
+.orbit-spark::before {
+  content: ""; position: absolute; left: 0; top: 0; translate: -50% -50% 92px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--stamp-lt);
+  box-shadow: 0 0 10px 3px rgba(240, 117, 92, .7);
+}
+.orbit-spark.sp2::before { width: 4px; height: 4px; opacity: .7; translate: -50% -50% 80px; }
+
+/* rotate と translate を同じ要素に置くと、2つ目以降は「その要素自身の
+   （すでに動いた後の）位置」を中心に回ってしまい実質その場で止まって
+   見える。そのため「原点を中心に向きだけ変える層(.st-item)」と
+   「その向いた方向へ半径ぶん押し出す層(.st-item-radius)」を分離する。 */
+.stats-inner { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d; }
+.st-item { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.st-item:nth-child(1) { rotate: y 0deg; }
+.st-item:nth-child(2) { rotate: y 90deg; }
+.st-item:nth-child(3) { rotate: y 180deg; }
+.st-item:nth-child(4) { rotate: y 270deg; }
+.st-item-radius { position: absolute; top: 0; left: 0; width: 0; height: 0; translate: 0 0 95px; transform-style: preserve-3d; }
+/* Y軸（周回の向き＋回転）を打ち消す層。これだけでは軌道面の傾き（62deg）
+   が残ってしまい文字が寝て見えるため、.st-item-inner 側で X軸の傾きも
+   別途打ち消し、常にカメラ正面を向く「ビルボード」にする。 */
+.st-item-face { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d; animation: orbitBillboard 42s linear infinite; }
+.st-item-inner {
+  position: absolute; left: 0; top: 0; translate: -50% -50%; rotate: x -62deg;
+  width: 112px; padding: 8px 10px; border-radius: 12px;
+  background: rgba(38, 35, 22, .88); border: 1px solid var(--rule); backdrop-filter: blur(6px);
+  box-shadow: 0 14px 26px -14px rgba(0, 0, 0, .75);
+  animation: orbitDepth 42s linear infinite;
+  transition: border-color .3s ease, background .3s ease;
+}
+.st-item-inner .st-num { font-size: 20px; }
+.st-item-inner .st-txt { font-size: 10px; margin-top: 2px; }
+.st-num { font-weight: 900; color: var(--stamp-lt); font-family: "Shippori Mincho", serif; line-height: 1; }
+.st-txt { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.st-item:nth-child(1) .st-item-face, .st-item:nth-child(1) .st-item-inner { animation-delay: 0s; }
+.st-item:nth-child(2) .st-item-face, .st-item:nth-child(2) .st-item-inner { animation-delay: -10.5s; }
+.st-item:nth-child(3) .st-item-face, .st-item:nth-child(3) .st-item-inner { animation-delay: -21s; }
+.st-item:nth-child(4) .st-item-face, .st-item:nth-child(4) .st-item-inner { animation-delay: -31.5s; }
+.stats-orbit-wrap:hover .st-item-face,
+.stats-orbit-wrap:hover .st-item-inner,
+.stats-orbit-wrap:hover .orbit-spin,
+.stats-orbit-wrap:hover .orbit-spark { animation-play-state: paused; }
+.st-item-inner:hover { border-color: var(--stamp); background: rgba(38, 35, 22, .98); }
 
 @media (min-width: 761px) {
   .stats-bar { padding: 76px 0 68px; }
-  .stats-orbit-wrap { min-height: 440px; display: flex; align-items: center; justify-content: center; perspective: 1100px; }
+  .stats-orbit-wrap { min-height: 440px; perspective: 1100px; }
 
   .stats-globe {
-    position: absolute; top: 50%; left: 50%; translate: -50% -50%; margin: 0; width: 126px; height: 126px; z-index: 1;
+    width: 126px; height: 126px;
     box-shadow: 0 0 56px 10px rgba(70, 150, 230, .32), inset -16px -16px 26px rgba(0, 0, 0, .55), inset 12px 12px 22px rgba(140, 205, 255, .28);
   }
 
-  /* 軌道面を傾ける静的な層（傘）と、その中で回り続ける層を分ける。
-     2段構成にすることで「傾いた円をY軸でくるくる回す」立体軌道になる。
-     0サイズの「軸」にする（inset:0 で帯全体を覆う大きな面を回すと、
-     周辺部が視点に近づきすぎて描画が破綻するため）。 */
-  .orbit-tilt {
-    display: block; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
-    transform-style: preserve-3d; rotate: x 62deg;
-  }
-  .orbit-spin {
-    position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d;
-    animation: orbitSpinY 42s linear infinite;
-  }
+  .orbit-path { width: 340px; height: 340px; }
+  .orbit-spark::before { width: 7px; height: 7px; translate: -50% -50% 165px; box-shadow: 0 0 12px 3px rgba(240, 117, 92, .7); }
+  .orbit-spark.sp2::before { width: 5px; height: 5px; translate: -50% -50% 145px; }
 
-  .orbit-path {
-    display: block; position: absolute; top: 50%; left: 50%; translate: -50% -50%; z-index: 1;
-    width: 340px; height: 340px; border-radius: 50%; border: 1px dashed rgba(239, 234, 219, .18);
-  }
-  .orbit-spark {
-    display: block; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
-    animation: orbitSpinY 12s linear infinite;
-  }
-  .orbit-spark.sp2 { animation-duration: 17s; animation-direction: reverse; }
-  .orbit-spark::before {
-    content: ""; position: absolute; left: 0; top: 0; translate: -50% -50% 165px;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--stamp-lt);
-    box-shadow: 0 0 12px 3px rgba(240, 117, 92, .7);
-  }
-  .orbit-spark.sp2::before { width: 5px; height: 5px; opacity: .7; translate: -50% -50% 145px; }
-
-  /* rotate と translate を同じ要素に置くと、2つ目以降は「その要素自身の
-     （すでに動いた後の）位置」を中心に回ってしまい実質その場で止まって
-     見える。そのため「原点を中心に向きだけ変える層(.st-item)」と
-     「その向いた方向へ半径ぶん押し出す層(.st-item-radius)」を分離する。 */
-  .stats-inner { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d; }
-  .st-item { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-  .st-item:nth-child(1) { rotate: y 0deg; }
-  .st-item:nth-child(2) { rotate: y 90deg; }
-  .st-item:nth-child(3) { rotate: y 180deg; }
-  .st-item:nth-child(4) { rotate: y 270deg; }
-  .st-item-radius { position: absolute; top: 0; left: 0; width: 0; height: 0; translate: 0 0 170px; transform-style: preserve-3d; }
-  /* Y軸（周回の向き＋回転）を打ち消す層。これだけでは軌道面の傾き（62deg）
-     が残ってしまい文字が寝て見えるため、.st-item-inner 側で X軸の傾きも
-     別途打ち消し、常にカメラ正面を向く「ビルボード」にする。 */
-  .st-item-face { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d; animation: orbitBillboard 42s linear infinite; }
+  .st-item-radius { translate: 0 0 170px; }
   .st-item-inner {
-    position: absolute; left: 0; top: 0; translate: -50% -50%; rotate: x -62deg;
     width: 150px; padding: 12px 14px; border-radius: 16px;
-    background: rgba(38, 35, 22, .88); border: 1px solid var(--rule); backdrop-filter: blur(6px);
     box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .75);
-    animation: orbitDepth 42s linear infinite;
-    transition: border-color .3s ease, background .3s ease;
   }
-  .st-item:nth-child(1) .st-item-face, .st-item:nth-child(1) .st-item-inner { animation-delay: 0s; }
-  .st-item:nth-child(2) .st-item-face, .st-item:nth-child(2) .st-item-inner { animation-delay: -10.5s; }
-  .st-item:nth-child(3) .st-item-face, .st-item:nth-child(3) .st-item-inner { animation-delay: -21s; }
-  .st-item:nth-child(4) .st-item-face, .st-item:nth-child(4) .st-item-inner { animation-delay: -31.5s; }
-  .stats-orbit-wrap:hover .st-item-face,
-  .stats-orbit-wrap:hover .st-item-inner,
-  .stats-orbit-wrap:hover .orbit-spin,
-  .stats-orbit-wrap:hover .orbit-spark { animation-play-state: paused; }
-  .st-item-inner:hover { border-color: var(--stamp); background: rgba(38, 35, 22, .98); }
+  .st-item-inner .st-num { font-size: 30px; }
+  .st-item-inner .st-txt { font-size: 12px; margin-top: 4px; }
 }
 
 @keyframes orbitSpinY { from { rotate: y 0deg; } to { rotate: y 360deg; } }
@@ -710,7 +717,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .plan:nth-child(1), .plan:nth-child(2) { rotate: 0deg; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .sec { padding: 64px 0; }
-  .stats-inner { gap: 14px; }
   .about-table th { width: 120px; min-width: 100px; }
   .mission-box { padding: 36px 24px; }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
