@@ -488,8 +488,8 @@ img { max-width: 100%; display: block; }
   .plans.plan-track {
     display: flex; gap: 14px; margin-top: 0;
     overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-inline: 14vw;
-    padding: 10px 14vw 22px;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 20vw;
+    padding: 10px 20vw 22px;
     perspective: 900px;
     -webkit-overflow-scrolling: touch; scrollbar-width: none;
   }
@@ -497,16 +497,20 @@ img { max-width: 100%; display: block; }
   /* カード幅は vw で直接指定する（%だと .plan-track 自身の左右パディングを
      差し引いた内側の幅が基準になり、画面幅に対しては指定より小さくなって
      しまうため）。隣のカードがしっかり覗くよう、幅よりも見切れの分かり
-     やすさを優先して 72vw に調整。
+     やすさを優先して 60vw に調整。
      スクロール演出の html.js-anim [data-anim].is-in ルール（3クラス+要素
      セレクタ）に opacity/scale で必ず勝てるよう #plans で詳細度を底上げ
      する（独立プロパティ同士は本来競合しないが、opacity は reveal 側も
      持っているため）。 */
   #plans .plan-track .plan {
-    flex: 0 0 72vw; max-width: 72vw; scroll-snap-align: center; scroll-snap-stop: always;
+    flex: 0 0 60vw; max-width: 60vw; scroll-snap-align: center; scroll-snap-stop: always;
     opacity: .7; scale: .9; rotate: y 0deg;
     transition: scale .4s var(--ease), opacity .4s var(--ease), translate .4s var(--ease), rotate .4s var(--ease), box-shadow .4s ease;
   }
+  /* カード幅を狭めた分、価格の「¥19,800 / 月」が改行して見苦しくならない
+     よう縮小する（他の文言は折り返しても崩れないのでそのまま）。 */
+  .plan-track .plan-price { font-size: 26px; white-space: nowrap; }
+  .plan-track .plan-price small { font-size: 12px; }
   #plans .plan-track .plan.is-before { rotate: y 7deg; }
   #plans .plan-track .plan.is-after { rotate: y -7deg; }
   #plans .plan-track .plan.is-active {
