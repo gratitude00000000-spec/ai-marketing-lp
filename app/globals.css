@@ -142,9 +142,11 @@ img { max-width: 100%; display: block; }
 .hero h1 .ac { color: var(--stamp-lt); }
 .hero h1 .brand { color: var(--paper); text-shadow: 0 0 26px rgba(213, 67, 42, .45); }
 .hero h1 .nowrap { white-space: nowrap; }
-.hero-h1-last { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+/* 見出し最終行を幅いっぱいのflexにし、ロボットを行の右端まで離して置く
+   ことで、テキストに寄り過ぎず見出しブロック全体とバランスを取る。 */
+.hero-h1-last { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
 .hero-robot {
-  width: clamp(52px, 7vw, 92px); height: auto; flex-shrink: 0;
+  width: clamp(64px, 9vw, 120px); height: auto; flex-shrink: 0; margin-left: auto;
   filter: drop-shadow(0 8px 18px rgba(213, 67, 42, .35)) drop-shadow(0 0 20px rgba(240, 117, 92, .25));
   animation: heroRobotFloat 5.5s ease-in-out infinite;
 }
