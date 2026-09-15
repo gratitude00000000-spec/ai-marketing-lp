@@ -126,9 +126,31 @@ export default function AboutPage() {
                 <th>事業内容</th>
                 <td>
                   <ul>
-                    <li>飲食事業・パーティー会場運営</li>
-                    <li>グルメサイト運営</li>
-                    <li>Webマーケティング（AI集客・SEO・MEO・GBP運用代行）</li>
+                    <li>
+                      WEBマーケティング全般（AI集客本サイト・HP制作
+                      <a href="https://hp.ai-marketing-japan.jp/" target="_blank" rel="noopener noreferrer">
+                        AI DRIVE
+                      </a>
+                      ）
+                    </li>
+                    <li>
+                      グルメサイト運営（
+                      <a href="https://www.okinawa-party-yarou.com/" target="_blank" rel="noopener noreferrer">
+                        ぱーてぃー野朗
+                      </a>
+                      ）
+                    </li>
+                    <li>
+                      飲食事業・パーティー会場運営（
+                      <a href="https://partyspace-next-naha.com/" target="_blank" rel="noopener noreferrer">
+                        PARTYSPACE NEXT
+                      </a>
+                      ・
+                      <a href="https://partyspace-next2-okinawacity.com/" target="_blank" rel="noopener noreferrer">
+                        PARTYSPACE NEXTⅡ 沖縄市
+                      </a>
+                      ）
+                    </li>
                   </ul>
                 </td>
               </tr>
