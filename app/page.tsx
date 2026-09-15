@@ -30,6 +30,16 @@ const SERVICES = [
     points: ['定期投稿による鮮度維持', '口コミ返信による信頼感向上', 'GBP全体の整備と最適化'],
   },
   {
+    img: '/images/logo-ai-llmo-aio-aeo-webmarketing-.png',
+    title: 'AIに選ばれるHP',
+    desc: 'ただのホームページではなく、AIに選ばれる為の対策。',
+    points: [
+      'AI理解設計：会社・サービス・地域・強みを、AIが正しく理解しやすい構造へ。',
+      'AI回答コンテンツ：FAQ・料金・実績・専門情報を整備し、AIが回答の根拠として扱いやすい情報へ。',
+      'AI技術最適化：構造化データ・SEO・内部リンク・クロール環境を整え、検索エンジンとAIの双方に伝わるサイトへ。',
+    ],
+  },
+  {
     img: '/ai-synergy-global-.jpg',
     title: 'シナジー創出と多言語対応',
     desc: 'GBP単体ではなく、他プラットフォームとの連携や多言語化で、より広い接点づくりを支援します。',
@@ -199,20 +209,15 @@ export default function HomePage() {
           <div data-anim="up">
             <span className="ey ey-b">サービス内容</span>
             <h2 className="sec-h2">
-              投稿代行ではなく、
+              AIが見つけ、人が選ぶ、
               <br />
-              <span className="accent">集客全体のシナジー</span>まで設計します。
+              <span className="accent">新しいWEB集客</span>
             </h2>
             <p className="sec-lead">GBP運用、HP、SNS連携による相乗効果UPを支援。</p>
           </div>
           <div className="svc-grid">
-            {SERVICES.map((s, i) => (
-              <div
-                className="svc-card"
-                key={s.title}
-                data-anim="blur"
-                data-idx={String(i + 1).padStart(2, '0')}
-              >
+            {SERVICES.map((s) => (
+              <div className="svc-card" key={s.title} data-anim="blur">
                 <div className="svc-img">
                   <img loading="lazy" src={s.img} alt={s.title} />
                 </div>
