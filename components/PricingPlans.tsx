@@ -63,7 +63,11 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
             best = { idx, ratio: entry.intersectionRatio };
           }
         }
-        if (best && best.ratio > 0.55) setActive(best.idx);
+        if (best && best.ratio > 0.55) {
+          // 一度でも別のカードへ移動したら「スワイプ→」のヒントは消す
+          if (best.idx !== initialIndex) track.classList.add('is-swiped');
+          setActive(best.idx);
+        }
       },
       { root: track, threshold: [0.25, 0.55, 0.75, 0.95] },
     );
@@ -99,6 +103,11 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
               }}
             >
               {plan.featured && <div className="plan-badge">おすすめ</div>}
+              {plans.length > 1 && (
+                <span className="plan-swipe-hint" aria-hidden="true">
+                  スワイプ<i>→</i>
+                </span>
+              )}
               <div className="plan-ico">
                 <img loading="lazy" src={plan.icon} alt={plan.name} />
               </div>
