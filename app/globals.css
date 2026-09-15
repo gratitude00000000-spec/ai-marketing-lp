@@ -311,18 +311,23 @@ img { max-width: 100%; display: block; }
   .st-item:nth-child(3) { rotate: y 180deg; }
   .st-item:nth-child(4) { rotate: y 270deg; }
   .st-item-radius { position: absolute; top: 0; left: 0; width: 0; height: 0; translate: 0 0 170px; transform-style: preserve-3d; }
+  /* Y軸（周回の向き＋回転）を打ち消す層。これだけでは軌道面の傾き（62deg）
+     が残ってしまい文字が寝て見えるため、.st-item-inner 側で X軸の傾きも
+     別途打ち消し、常にカメラ正面を向く「ビルボード」にする。 */
+  .st-item-face { position: absolute; top: 0; left: 0; width: 0; height: 0; transform-style: preserve-3d; animation: orbitBillboard 42s linear infinite; }
   .st-item-inner {
-    position: absolute; left: 0; top: 0; translate: -50% -50%;
+    position: absolute; left: 0; top: 0; translate: -50% -50%; rotate: x -62deg;
     width: 150px; padding: 12px 14px; border-radius: 16px;
     background: rgba(38, 35, 22, .88); border: 1px solid var(--rule); backdrop-filter: blur(6px);
     box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .75);
-    animation: orbitBillboard 42s linear infinite, orbitDepth 42s linear infinite;
+    animation: orbitDepth 42s linear infinite;
     transition: border-color .3s ease, background .3s ease;
   }
-  .st-item:nth-child(1) .st-item-inner { animation-delay: 0s; }
-  .st-item:nth-child(2) .st-item-inner { animation-delay: -10.5s; }
-  .st-item:nth-child(3) .st-item-inner { animation-delay: -21s; }
-  .st-item:nth-child(4) .st-item-inner { animation-delay: -31.5s; }
+  .st-item:nth-child(1) .st-item-face, .st-item:nth-child(1) .st-item-inner { animation-delay: 0s; }
+  .st-item:nth-child(2) .st-item-face, .st-item:nth-child(2) .st-item-inner { animation-delay: -10.5s; }
+  .st-item:nth-child(3) .st-item-face, .st-item:nth-child(3) .st-item-inner { animation-delay: -21s; }
+  .st-item:nth-child(4) .st-item-face, .st-item:nth-child(4) .st-item-inner { animation-delay: -31.5s; }
+  .stats-orbit-wrap:hover .st-item-face,
   .stats-orbit-wrap:hover .st-item-inner,
   .stats-orbit-wrap:hover .orbit-spin,
   .stats-orbit-wrap:hover .orbit-spark { animation-play-state: paused; }

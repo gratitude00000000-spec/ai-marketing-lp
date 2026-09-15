@@ -146,33 +146,41 @@ export default function HomePage() {
               <div className="stats-inner">
                 <div className="st-item">
                   <div className="st-item-radius">
-                    <div className="st-item-inner">
-                      <div className="st-num">全国</div>
-                      <div className="st-txt">エリア・業種を問わず対応</div>
+                    <div className="st-item-face">
+                      <div className="st-item-inner">
+                        <div className="st-num">全国</div>
+                        <div className="st-txt">エリア・業種を問わず対応</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="st-item">
                   <div className="st-item-radius">
-                    <div className="st-item-inner">
-                      <div className="st-num">AI対応</div>
-                      <div className="st-txt">AIO / LLMO / AEO / MEO 総合支援</div>
+                    <div className="st-item-face">
+                      <div className="st-item-inner">
+                        <div className="st-num">AI対応</div>
+                        <div className="st-txt">AIO / LLMO / AEO / MEO 総合支援</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="st-item">
                   <div className="st-item-radius">
-                    <div className="st-item-inner">
-                      <div className="st-num">継続率</div>
-                      <div className="st-txt">90%以上の高い継続率</div>
+                    <div className="st-item-face">
+                      <div className="st-item-inner">
+                        <div className="st-num">継続率</div>
+                        <div className="st-txt">90%以上の高い継続率</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="st-item">
                   <div className="st-item-radius">
-                    <div className="st-item-inner">
-                      <div className="st-num">安心</div>
-                      <div className="st-txt">充実のサポート体制</div>
+                    <div className="st-item-face">
+                      <div className="st-item-inner">
+                        <div className="st-num">安心</div>
+                        <div className="st-txt">充実のサポート体制</div>
+                      </div>
                     </div>
                   </div>
                 </div>
