@@ -58,10 +58,6 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
     }
     track.classList.add('is-ready');
 
-    // それでも最初のコールバックは基準状態の確定として扱うだけにし、
-    // 「スワイプ→」ヒントを消す判定には使わない（2回目以降＝実際に
-    // ユーザーが動かした結果とみなす）。
-    let settled = false;
     const io = new IntersectionObserver(
       (entries) => {
         let best: { idx: number; ratio: number } | null = null;
@@ -71,11 +67,7 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
             best = { idx, ratio: entry.intersectionRatio };
           }
         }
-        if (best && best.ratio > 0.55) {
-          if (settled) track.classList.add('is-swiped');
-          settled = true;
-          setActive(best.idx);
-        }
+        if (best && best.ratio > 0.55) setActive(best.idx);
       },
       { root: track, threshold: [0.25, 0.55, 0.75, 0.95] },
     );
@@ -111,11 +103,16 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
               }}
             >
               {plan.featured && <div className="plan-badge">おすすめ</div>}
-              {plans.length > 1 && (
-                <span className="plan-swipe-hint" aria-hidden="true">
-                  スワイプ<i>→</i>
-                </span>
-              )}
+              {plans.length > 1 &&
+                (i === plans.length - 1 ? (
+                  <span className="plan-swipe-hint hint-left" aria-hidden="true">
+                    <i>←</i>スワイプ
+                  </span>
+                ) : (
+                  <span className="plan-swipe-hint" aria-hidden="true">
+                    スワイプ<i>→</i>
+                  </span>
+                ))}
               <div className="plan-ico">
                 <img loading="lazy" src={plan.icon} alt={plan.name} />
               </div>

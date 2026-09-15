@@ -488,21 +488,22 @@ img { max-width: 100%; display: block; }
   .plans.plan-track {
     display: flex; gap: 14px; margin-top: 0;
     overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-inline: 9vw;
-    padding: 10px 9vw 22px;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 11vw;
+    padding: 10px 11vw 22px;
     perspective: 900px;
     -webkit-overflow-scrolling: touch; scrollbar-width: none;
   }
   .plans.plan-track::-webkit-scrollbar { display: none; }
-  /* カード幅は「画面幅の82〜86%」の指定どおり vw で直接指定する（%だと
-     .plan-track 自身の左右パディングを差し引いた内側の幅が基準になり、
-     画面幅に対しては指定より小さくなってしまうため）。
+  /* カード幅は vw で直接指定する（%だと .plan-track 自身の左右パディングを
+     差し引いた内側の幅が基準になり、画面幅に対しては指定より小さくなって
+     しまうため）。隣のカードがしっかり覗くよう、幅よりも見切れの分かり
+     やすさを優先して 78vw に調整。
      スクロール演出の html.js-anim [data-anim].is-in ルール（3クラス+要素
      セレクタ）に opacity/scale で必ず勝てるよう #plans で詳細度を底上げ
      する（独立プロパティ同士は本来競合しないが、opacity は reveal 側も
      持っているため）。 */
   #plans .plan-track .plan {
-    flex: 0 0 82vw; max-width: 82vw; scroll-snap-align: center; scroll-snap-stop: always;
+    flex: 0 0 78vw; max-width: 78vw; scroll-snap-align: center; scroll-snap-stop: always;
     opacity: .7; scale: .9; rotate: y 0deg;
     transition: scale .4s var(--ease), opacity .4s var(--ease), translate .4s var(--ease), rotate .4s var(--ease), box-shadow .4s ease;
   }
@@ -527,8 +528,9 @@ img { max-width: 100%; display: block; }
   .plan-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; background: var(--rule); border: none; cursor: pointer; transition: scale .25s ease, background .25s ease; }
   .plan-dot.is-active { background: var(--stamp); scale: 1.35; }
 
-  /* カード内の「スワイプ→」ヒント。最初のカード（おすすめ）にだけ出し、
-     一度でも横に動かしたら消える（.plan-track.is-swiped が付く）。 */
+  /* カード内の「スワイプ」ヒント。アクティブなカードに常に出し、
+     まだ見せていない方向（右／左）を矢印で示す。中央のカードだけに
+     出るので、どのプランを見ていても常にスワイプできることが分かる。 */
   .plan-swipe-hint {
     display: inline-flex; align-items: center; gap: 3px;
     position: absolute; top: 16px; right: 16px; z-index: 2;
@@ -538,11 +540,13 @@ img { max-width: 100%; display: block; }
     opacity: 0; transition: opacity .4s ease;
     pointer-events: none;
   }
+  .plan-swipe-hint.hint-left { right: auto; left: 16px; padding: 5px 12px 5px 10px; }
   #plans .plan-track .plan.is-active .plan-swipe-hint { opacity: 1; }
-  .plan-track.is-swiped .plan-swipe-hint { opacity: 0 !important; }
   .plan-swipe-hint i { font-style: normal; display: inline-block; animation: planSwipeNudge 1.3s ease-in-out infinite; }
+  .plan-swipe-hint.hint-left i { animation-name: planSwipeNudgeLeft; }
 }
 @keyframes planSwipeNudge { 0%, 100% { translate: 0 0; } 50% { translate: 4px 0; } }
+@keyframes planSwipeNudgeLeft { 0%, 100% { translate: 0 0; } 50% { translate: -4px 0; } }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
   #plans .plan-track .plan { scale: 1; opacity: 1; rotate: y 0deg; }
   #plans .plan-track .plan.is-active { translate: 0; box-shadow: var(--sh2); }
