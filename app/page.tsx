@@ -6,6 +6,7 @@ import { LineConsultBox } from '@/components/LineConsultBox';
 import { HeroPhone } from '@/components/HeroPhone';
 import { IndustryMarquee } from '@/components/IndustryMarquee';
 import { PricingPlans } from '@/components/PricingPlans';
+import { ServicesMobileCarousel } from '@/components/ServicesMobileCarousel';
 import { PLANS, HOME_FAQ } from '@/lib/site';
 import { organizationSchema, webSiteSchema, faqSchema, jsonLd } from '@/seo/jsonld';
 
@@ -20,18 +21,21 @@ const SERVICES = [
   {
     img: '/ai-search-google-trend-.jpg',
     title: '最新AIを活用した集客支援',
+    short: 'AI集客支援',
     desc: 'AIに選ばれる時代を見据え、AIO・LLMO・AEO・MEOまで考慮した集客導線を設計します。',
     points: ['最新トレンドを踏まえた改善提案', 'AI検索時代に合わせた情報設計', '継続的なコンサルティング対応'],
   },
   {
     img: '/googlebusinessprofile-meo-aio-.jpg',
     title: 'Googleビジネスプロフィール運用',
+    short: 'GBP運用',
     desc: '投稿、口コミ返信、メニューやページ全体の編集など、日常運用をまとめてサポートします。',
     points: ['定期投稿による鮮度維持', '口コミ返信による信頼感向上', 'GBP全体の整備と最適化'],
   },
   {
     img: '/images/logo-ai-llmo-aio-aeo-webmarketing-.png',
     title: 'AIに選ばれるHP',
+    short: 'AIに選ばれるHP',
     desc: 'ただのホームページではなく、AIに選ばれる為の対策。',
     points: [
       'AI理解設計：会社・サービス・地域・強みを、AIが正しく理解しやすい構造へ。',
@@ -42,6 +46,7 @@ const SERVICES = [
   {
     img: '/ai-synergy-global-.jpg',
     title: 'シナジー創出と多言語対応',
+    short: 'シナジー創出',
     desc: 'GBP単体ではなく、他プラットフォームとの連携や多言語化で、より広い接点づくりを支援します。',
     points: ['各媒体との連携による相乗効果', '多言語化による対応範囲の拡張', '投稿時の画像SEOも考慮'],
   },
@@ -233,6 +238,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <ServicesMobileCarousel services={SERVICES} />
         </div>
       </section>
 
