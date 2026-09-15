@@ -226,62 +226,20 @@ img { max-width: 100%; display: block; }
 .stats-bar { background: var(--surface2); padding: 48px 0 40px; border-bottom: 1px solid var(--rule); overflow: hidden; }
 .stats-orbit-wrap { position: relative; min-height: 280px; display: flex; align-items: center; justify-content: center; perspective: 900px; }
 
-/* 地球（装飾）。海の球体に大陸・雲・極冠・陰影を重ね、よりリアルな
-   地球風の見た目にする。大陸と雲は横スクロールで自転して見える
-   （雲は大陸と別速度にすることで視差が出て奥行きを感じさせる）。 */
+/* 地球（実写真）。NASA衛星写真ベースの地球画像を丸くトリミングして表示し、
+   ゆっくり自転（Z軸回転）させる。写真自体に光と影が写り込んでいるため、
+   周囲の発光（box-shadow）だけを添えてグローの中に浮かぶ地球に見せる。 */
 .stats-globe {
   position: absolute; top: 50%; left: 50%; translate: -50% -50%; z-index: 1;
   width: 74px; height: 74px; border-radius: 50%; overflow: hidden; pointer-events: none;
-  background: radial-gradient(circle at 32% 30%, #2f7fc0 0%, #1f6aa8 40%, #124a80 68%, #082b52 90%, #051c38 100%);
-  box-shadow: 0 0 30px 5px rgba(70, 150, 230, .32), inset -11px -11px 20px rgba(0, 0, 0, .55), inset 8px 8px 16px rgba(140, 205, 255, .28);
+  background: #051428;
+  box-shadow: 0 0 30px 5px rgba(70, 150, 230, .32), inset 0 0 14px 3px rgba(0, 0, 0, .4);
 }
-.globe-land {
-  position: absolute; inset: -15% -70%; background-repeat: repeat-x; background-size: 200% 100%;
-  background-image:
-    /* 大陸本体（色の変化点を急にして、輪郭のくっきりした塊に見せる） */
-    radial-gradient(ellipse 15% 24% at 8% 40%, #63b06d 0%, #5aa864 58%, transparent 68%),
-    radial-gradient(ellipse 11% 32% at 15% 62%, #56a561 0%, #4c9a5b 58%, transparent 68%),
-    radial-gradient(ellipse 23% 28% at 34% 54%, #58a862 0%, #4f9a58 58%, transparent 68%),
-    radial-gradient(ellipse 13% 20% at 40% 74%, #488350 0%, #3f7a48 58%, transparent 68%),
-    radial-gradient(ellipse 21% 22% at 63% 45%, #c4a768 0%, #b79a5e 56%, transparent 66%),
-    radial-gradient(ellipse 15% 26% at 71% 68%, #56a561 0%, #4c9a5b 58%, transparent 68%),
-    radial-gradient(ellipse 18% 18% at 87% 30%, #63b06d 0%, #5aa864 58%, transparent 68%),
-    radial-gradient(ellipse 14% 24% at 93% 63%, #488350 0%, #3f7a48 58%, transparent 68%),
-    /* 砂漠・山脈などの濃淡（大陸の内側に小さく重ねて質感を出す） */
-    radial-gradient(ellipse 8% 8% at 31% 26%, #a68a54 0%, transparent 74%),
-    radial-gradient(ellipse 9% 9% at 59% 22%, #6a5a3a 0%, transparent 74%),
-    radial-gradient(ellipse 7% 12% at 12% 44%, #2f5c38 0%, transparent 76%),
-    radial-gradient(ellipse 7% 12% at 65% 48%, #2f5c38 0%, transparent 76%),
-    radial-gradient(ellipse 6% 9% at 90% 33%, #7a6a3e 0%, transparent 74%);
-  animation: globeSpinTex 18s linear infinite;
-  opacity: .97;
+.globe-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  animation: globeSpin 34s linear infinite;
 }
-.globe-clouds {
-  position: absolute; inset: -20% -80%; background-repeat: repeat-x; background-size: 200% 100%;
-  background-image:
-    radial-gradient(ellipse 17% 7% at 18% 18%, rgba(255, 255, 255, .65) 0%, transparent 78%),
-    radial-gradient(ellipse 24% 9% at 44% 66%, rgba(255, 255, 255, .5) 0%, transparent 78%),
-    radial-gradient(ellipse 15% 6% at 64% 33%, rgba(255, 255, 255, .6) 0%, transparent 78%),
-    radial-gradient(ellipse 22% 8% at 86% 54%, rgba(255, 255, 255, .48) 0%, transparent 78%),
-    radial-gradient(ellipse 16% 7% at 106% 22%, rgba(255, 255, 255, .55) 0%, transparent 78%),
-    radial-gradient(ellipse 12% 5% at 30% 84%, rgba(255, 255, 255, .4) 0%, transparent 78%);
-  animation: globeSpinTex 11s linear infinite reverse;
-  mix-blend-mode: screen;
-}
-.globe-poles {
-  position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background:
-    radial-gradient(ellipse 90% 22% at 50% -4%, rgba(245, 250, 255, .92) 0%, rgba(245, 250, 255, .5) 45%, transparent 74%),
-    radial-gradient(ellipse 90% 20% at 50% 104%, rgba(245, 250, 255, .88) 0%, rgba(245, 250, 255, .46) 45%, transparent 74%);
-}
-.globe-shade {
-  position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background:
-    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .4), transparent 46%),
-    radial-gradient(circle at 76% 80%, rgba(0, 0, 0, .55), transparent 56%);
-  box-shadow: inset 0 0 10px 2px rgba(140, 205, 255, .3);
-}
-@keyframes globeSpinTex { from { background-position: 0% 0; } to { background-position: -100% 0; } }
+@keyframes globeSpin { from { rotate: 0deg; } to { rotate: 360deg; } }
 
 /* 軌道面を傾ける静的な層（傘）と、その中で回り続ける層を分ける。
    2段構成にすることで「傾いた円をY軸でくるくる回す」立体軌道になる。

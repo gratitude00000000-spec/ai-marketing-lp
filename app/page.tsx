@@ -135,10 +135,7 @@ export default function HomePage() {
       <div className="stats-bar">
         <div className="wrap stats-orbit-wrap" data-anim="scale">
           <div className="stats-globe" aria-hidden="true">
-            <span className="globe-land" />
-            <span className="globe-clouds" />
-            <span className="globe-poles" />
-            <span className="globe-shade" />
+            <img className="globe-photo" src="/images/earth-globe.png" alt="" loading="lazy" />
           </div>
           <div className="orbit-tilt">
             <span className="orbit-path" aria-hidden="true" />
