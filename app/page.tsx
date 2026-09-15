@@ -136,6 +136,8 @@ export default function HomePage() {
         <div className="wrap stats-orbit-wrap" data-anim="scale">
           <div className="stats-globe" aria-hidden="true">
             <span className="globe-land" />
+            <span className="globe-clouds" />
+            <span className="globe-poles" />
             <span className="globe-shade" />
           </div>
           <div className="orbit-tilt">
