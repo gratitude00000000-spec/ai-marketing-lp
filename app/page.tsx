@@ -90,7 +90,10 @@ export default function HomePage() {
                 <span className="brand">AI集客ドットコム</span>が
               </span>
               <br />
-              支援します。
+              <span className="hero-h1-last">
+                支援します。
+                <img className="hero-robot" src="/images/ai-robot.png" alt="" />
+              </span>
             </h1>
             <p className="lead">
               GoogleのAI検索（AIO）やChatGPT（LLMO）に引用される時代、ただ検索に出るだけでは集客できません。GBPの最適化はもちろん、AIO・LLMO・AEO・MEOまで見据えた情報設計で、「見つかり方」と「選ばれ方」を根本から整えます。
