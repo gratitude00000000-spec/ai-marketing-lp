@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { KeyboardEvent, TouchEvent, CSSProperties } from 'react';
+import type { KeyboardEvent } from 'react';
 
 type Service = { img: string; title: string; short: string; desc: string; points: string[] };
 
@@ -10,81 +10,92 @@ type Service = { img: string; title: string; short: string; desc: string; points
  * PC(761px以上)は従来どおり svc-grid の静止グリッドを表示し、これは
  * CSS（@media max-width:760px）でスマホのときだけ差し替え表示する。
  *
- * 全カードを常に DOM に描画し、位置は「現在のインデックスからの距離
- * (diff)」に応じた CSS カスタムプロパティで表現する。React の再レン
- * ダーで diff が変わるたびにインラインの値だけが変わるので、ブラウザ
- * は古い値から新しい値への transition を自動的に補間してくれる
- * （＝現在のカードが移動・縮小しながら退場し、次のカードが傾きながら
- * 入ってきて正面に戻る、を JS 側で個別にアニメーションさせる必要がない）。
+ * PricingPlans と同じ方式：ネイティブの横スクロール + scroll-snap で
+ * 指スワイプそのものをブラウザに任せる（慣性・ラバーバンドも自然に
+ * 効く）。どのカードが中央に来たかは IntersectionObserver で検出し、
+ * is-active/is-before/is-after を classList で直接付け外しする
+ * （JSX の className を状態依存にすると ScrollFx の外部 classList.add
+ * を再レンダーのたびに消してしまうため。PricingPlans と同じ理由）。
  *
  * JS が動かない／ハイドレーション前は `is-ready` を付けない。CSS 側も
- * `.msvc-stage.is-ready` を条件にすることで、それまでは通常の縦並び
- * （即座に全文閲覧可能）のまま。aria-hidden も ready 后でしか付けない
- * ため、JS 無効環境で他カードの内容がアクセシビリティツリーから消える
- * ことはない。
+ * `.msvc-track.is-ready` を条件にすることで、それまでは通常の縦並び
+ * （即座に全文閲覧可能）のまま。矢印・ドット・サムネイルも ready 後
+ * だけ描画するため、JS 無効環境で無反応なボタンが表示されることもない。
  */
 export function ServicesMobileCarousel({ services }: { services: Service[] }) {
-  const [current, setCurrent] = useState(0);
-  const [ready, setReady] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const touchStartX = useRef<number | null>(null);
+  const [active, setActive] = useState(0);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return;
+      el.classList.remove('is-active', 'is-before', 'is-after');
+      el.classList.add(i === active ? 'is-active' : i < active ? 'is-before' : 'is-after');
+      el.setAttribute('aria-hidden', String(i !== active));
+    });
+  }, [active]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
     setReady(true);
+    track.classList.add('is-ready');
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        let best: { idx: number; ratio: number } | null = null;
+        for (const entry of entries) {
+          const idx = Number((entry.target as HTMLElement).dataset.idx);
+          if (!best || entry.intersectionRatio > best.ratio) best = { idx, ratio: entry.intersectionRatio };
+        }
+        if (best && best.ratio > 0.55) setActive(best.idx);
+      },
+      { root: track, threshold: [0.25, 0.55, 0.75, 0.95] },
+    );
+    cardRefs.current.forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const goTo = (idx: number) => {
-    setCurrent(Math.max(0, Math.min(services.length - 1, idx)));
+    const clamped = Math.max(0, Math.min(services.length - 1, idx));
+    const el = cardRefs.current[clamped];
+    if (!el) return;
+    const reduce =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      const next = Math.min(services.length - 1, current + 1);
+      const next = Math.min(services.length - 1, active + 1);
       goTo(next);
       tabRefs.current[next]?.focus();
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      const prev = Math.max(0, current - 1);
+      const prev = Math.max(0, active - 1);
       goTo(prev);
       tabRefs.current[prev]?.focus();
     }
   };
 
-  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current == null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    const THRESHOLD = 40;
-    if (delta > THRESHOLD) goTo(current - 1);
-    else if (delta < -THRESHOLD) goTo(current + 1);
-  };
-
   return (
     <div className="msvc">
-      <div
-        className={`msvc-stage${ready ? ' is-ready' : ''}`}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        {services.map((s, i) => {
-          const diff = i - current;
-          const active = diff === 0;
-          const style = {
-            '--msvc-diff': diff,
-            '--msvc-tilt': active ? 0 : diff > 0 ? -6 : 6,
-            '--msvc-scale': active ? 1 : 0.96,
-            '--msvc-opacity': active ? 1 : 0.7,
-          } as CSSProperties;
-          return (
+      <div className="msvc-stage">
+        <div className="msvc-track" ref={trackRef}>
+          {services.map((s, i) => (
             <div
-              className={`msvc-card${active ? ' is-active' : ''}`}
+              className="msvc-card"
               key={s.title}
-              style={style}
-              aria-hidden={ready && !active}
+              data-idx={i}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
             >
               <div className="msvc-img">
                 <img loading="lazy" src={s.img} alt={s.title} />
@@ -99,16 +110,16 @@ export function ServicesMobileCarousel({ services }: { services: Service[] }) {
                 </ul>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
 
         {ready && services.length > 1 && (
           <>
             <button
               type="button"
               className="msvc-arrow prev"
-              onClick={() => goTo(current - 1)}
-              disabled={current === 0}
+              onClick={() => goTo(active - 1)}
+              disabled={active === 0}
               aria-label="前のサービスを見る"
             >
               ‹
@@ -116,8 +127,8 @@ export function ServicesMobileCarousel({ services }: { services: Service[] }) {
             <button
               type="button"
               className="msvc-arrow next"
-              onClick={() => goTo(current + 1)}
-              disabled={current === services.length - 1}
+              onClick={() => goTo(active + 1)}
+              disabled={active === services.length - 1}
               aria-label="次のサービスを見る"
             >
               ›
@@ -130,7 +141,7 @@ export function ServicesMobileCarousel({ services }: { services: Service[] }) {
         <>
           <div className="msvc-dots">
             {services.map((s, i) => (
-              <span key={s.title} className={`msvc-dot${i === current ? ' is-active' : ''}`} aria-hidden="true" />
+              <span key={s.title} className={`msvc-dot${i === active ? ' is-active' : ''}`} aria-hidden="true" />
             ))}
           </div>
 
@@ -143,9 +154,9 @@ export function ServicesMobileCarousel({ services }: { services: Service[] }) {
                 ref={(el) => {
                   tabRefs.current[i] = el;
                 }}
-                className={`msvc-thumb${i === current ? ' is-active' : ''}`}
-                aria-selected={i === current}
-                tabIndex={i === current ? 0 : -1}
+                className={`msvc-thumb${i === active ? ' is-active' : ''}`}
+                aria-selected={i === active}
+                tabIndex={i === active ? 0 : -1}
                 onClick={() => goTo(i)}
               >
                 <img loading="lazy" src={s.img} alt="" />
