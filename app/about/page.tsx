@@ -127,7 +127,9 @@ export default function AboutPage() {
                 <td>
                   <ul>
                     <li>
-                      WEBマーケティング全般（AI集客本サイト・HP制作
+                      WEBマーケティング全般（
+                      <Link href="/">AI集客ドットコム</Link>
+                      ・HP制作
                       <a href="https://hp.ai-marketing-japan.jp/" target="_blank" rel="noopener noreferrer">
                         AI DRIVE
                       </a>
