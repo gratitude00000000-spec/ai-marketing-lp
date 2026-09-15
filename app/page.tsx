@@ -294,34 +294,6 @@ export default function HomePage() {
                 現在AIに選ばれる時代に突入しています。目まぐるしく変わるこの時代を追い続けるのは簡単ではありません。だからこそ、株式会社Gratitudeにお任せください。
               </p>
             </div>
-            <div className="trust-grid">
-              <div className="trust-item" data-anim="blur">
-                <div className="trust-ico">
-                  <img loading="lazy" src="/11.jpg" alt="全国対応" />
-                </div>
-                <div className="trust-txt">全国対応</div>
-              </div>
-              <div className="trust-item" data-anim="blur">
-                <div className="trust-ico">
-                  <img loading="lazy" src="/12.jpg" alt="継続率" />
-                </div>
-                <div className="trust-txt">
-                  継続率
-                  <br />
-                  90%以上
-                </div>
-              </div>
-              <div className="trust-item" data-anim="blur">
-                <div className="trust-ico">
-                  <img loading="lazy" src="/13.jpg" alt="安心のサポート体制" />
-                </div>
-                <div className="trust-txt">
-                  安心の
-                  <br />
-                  サポート体制
-                </div>
-              </div>
-            </div>
           </div>
 
           <div data-anim="scale">
