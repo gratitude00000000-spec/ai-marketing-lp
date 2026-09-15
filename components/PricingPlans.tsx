@@ -47,13 +47,21 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
     const track = trackRef.current;
     if (!track) return;
 
-    // 最初に「おすすめ」プランを中央へ（アニメーションなしで即座に）
+    // 最初に「おすすめ」プランを中央へ。scrollIntoView は反映が非同期
+    // になるブラウザがあり、その場合 IntersectionObserver の最初の
+    // コールバックがスクロール前（1枚目が見えている）のレイアウトを
+    // 拾ってしまう。scrollLeft を直接計算して同期的に設定することで
+    // observe() を呼ぶ時点で確実に中央寄せを終わらせておく。
     const initialEl = cardRefs.current[initialIndex];
     if (initialEl) {
-      initialEl.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      track.scrollLeft = initialEl.offsetLeft + initialEl.offsetWidth / 2 - track.clientWidth / 2;
     }
     track.classList.add('is-ready');
 
+    // それでも最初のコールバックは基準状態の確定として扱うだけにし、
+    // 「スワイプ→」ヒントを消す判定には使わない（2回目以降＝実際に
+    // ユーザーが動かした結果とみなす）。
+    let settled = false;
     const io = new IntersectionObserver(
       (entries) => {
         let best: { idx: number; ratio: number } | null = null;
@@ -64,8 +72,8 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
           }
         }
         if (best && best.ratio > 0.55) {
-          // 一度でも別のカードへ移動したら「スワイプ→」のヒントは消す
-          if (best.idx !== initialIndex) track.classList.add('is-swiped');
+          if (settled) track.classList.add('is-swiped');
+          settled = true;
           setActive(best.idx);
         }
       },
