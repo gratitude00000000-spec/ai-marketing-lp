@@ -658,8 +658,8 @@ img { max-width: 100%; display: block; }
 .about-table tr { border-bottom: 1px solid var(--rule); }
 .about-table tr:first-child { border-top: 1px solid var(--rule); }
 .about-table th { font-size: 14px; font-weight: 700; color: var(--stamp-lt); padding: 20px 16px 20px 0; vertical-align: top; width: 180px; min-width: 140px; text-align: left; }
-.about-table td { font-size: 15px; color: var(--ink); padding: 20px 0; line-height: 1.75; }
-.about-table td a { color: var(--stamp-lt); text-decoration: underline; }
+.about-table td { font-size: 15px; color: var(--ink); padding: 20px 0; line-height: 1.75; word-break: keep-all; overflow-wrap: break-word; }
+.about-table td a { color: var(--stamp-lt); text-decoration: underline; white-space: nowrap; }
 .about-table ul { padding-left: 20px; display: grid; gap: 6px; }
 .mission-box { background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; padding: 52px 48px; color: var(--ink); margin-top: 56px; position: relative; overflow: hidden; }
 .mission-box::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 85% 15%, rgba(213, 67, 42, .16), transparent 60%); }
