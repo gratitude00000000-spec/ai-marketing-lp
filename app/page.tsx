@@ -5,6 +5,7 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { LineConsultBox } from '@/components/LineConsultBox';
 import { HeroPhone } from '@/components/HeroPhone';
 import { IndustryMarquee } from '@/components/IndustryMarquee';
+import { PricingPlans } from '@/components/PricingPlans';
 import { PLANS, HOME_FAQ } from '@/lib/site';
 import { organizationSchema, webSiteSchema, faqSchema, jsonLd } from '@/seo/jsonld';
 
@@ -263,27 +264,7 @@ export default function HomePage() {
               ※「月〇回投稿」とは、Googleビジネスプロフィールの最新情報・イベント更新など、日々の集客最適化のための更新回数です。
             </div>
           </div>
-          <div className="plans">
-            {PLANS.map((plan) => (
-              <div className={`plan${plan.featured ? ' feat' : ''}`} key={plan.name} data-anim="blur">
-                {plan.featured && <div className="plan-badge">おすすめ</div>}
-                <div className="plan-ico">
-                  <img loading="lazy" src={plan.icon} alt={plan.name} />
-                </div>
-                <div className="plan-name">{plan.name}</div>
-                <div className="plan-price">
-                  {plan.price} {plan.priceSmall && <small>{plan.priceSmall}</small>}
-                </div>
-                <div className="plan-tax">{plan.tax ?? ' '}</div>
-                <p className="plan-desc">{plan.desc}</p>
-                <ul className="plan-feats">
-                  {plan.feats.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <PricingPlans plans={PLANS} />
         </div>
       </section>
 

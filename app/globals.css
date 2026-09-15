@@ -453,6 +453,84 @@ img { max-width: 100%; display: block; }
 .plan-feats li.hl::before { color: var(--stamp-deep); }
 .plan-note { margin-top: 20px; padding: 12px 16px; background: rgba(213, 67, 42, .08); border-left: 3px solid var(--stamp); border-radius: 6px; font-size: 13px; color: var(--ink); line-height: 1.6; }
 
+/* 「詳しく見る」— ネイティブ <details>。JS なし・キーボードのみでも
+   開閉でき、閉じていても検索エンジンは中身を読み取れる（スマホのみ）。
+   PC 用には同じ4項目以降を常時表示の1本のリスト(.plan-feats-desktop-more)
+   として別途レンダリングし、従来どおりの見た目を保つ。details 内部は
+   ブラウザ内部の実装依存で CSS の display 上書きだけでは正しく
+   テキスト抽出されない場合があるため、無理に「常時展開」で共用しない。 */
+.plan-feats-desktop-more { display: none; }
+.plan-more { margin-top: 10px; }
+.plan-more summary {
+  display: inline-flex; align-items: center; gap: 5px; cursor: pointer; list-style: none;
+  font-size: 13px; font-weight: 700; color: var(--stamp-deep); user-select: none;
+}
+.plan-more summary::-webkit-details-marker { display: none; }
+.plan-more-arrow { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; transition: rotate .25s ease; margin-top: -2px; }
+.plan-more[open] .plan-more-arrow { rotate: 225deg; margin-top: 2px; }
+.plan-more .plan-feats-more { margin-top: 10px; }
+
+/* PC(761px以上): 従来どおりの静止グリッド。カルーセル用のボタン・
+   ドット・3D演出はすべて非表示にし、4項目以降も常時表示に戻す。 */
+.plan-nav { display: none; }
+@media (min-width: 761px) {
+  .plan-feats-desktop-more { display: grid; }
+  .plan-more { display: none; }
+}
+
+/* スマホ(760px以下): 同じDOMを横スワイプの3Dカルーセルに。
+   中央のカードだけ拡大・正面表示、両隣は縮小・減光・わずかに傾ける。
+   rotate/scale/translate は独立プロパティなので、スクロール演出
+   （[data-anim] の transform）と衝突しない。 */
+@media (max-width: 760px) {
+  .plans-carousel { position: relative; margin-top: 28px; width: 100vw; margin-left: calc(50% - 50vw); }
+  .plans.plan-track {
+    display: flex; gap: 14px; margin-top: 0;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 9vw;
+    padding: 10px 9vw 22px;
+    perspective: 900px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .plans.plan-track::-webkit-scrollbar { display: none; }
+  /* カード幅は「画面幅の82〜86%」の指定どおり vw で直接指定する（%だと
+     .plan-track 自身の左右パディングを差し引いた内側の幅が基準になり、
+     画面幅に対しては指定より小さくなってしまうため）。
+     スクロール演出の html.js-anim [data-anim].is-in ルール（3クラス+要素
+     セレクタ）に opacity/scale で必ず勝てるよう #plans で詳細度を底上げ
+     する（独立プロパティ同士は本来競合しないが、opacity は reveal 側も
+     持っているため）。 */
+  #plans .plan-track .plan {
+    flex: 0 0 82vw; max-width: 82vw; scroll-snap-align: center; scroll-snap-stop: always;
+    opacity: .7; scale: .9; rotate: y 0deg;
+    transition: scale .4s var(--ease), opacity .4s var(--ease), translate .4s var(--ease), rotate .4s var(--ease), box-shadow .4s ease;
+  }
+  #plans .plan-track .plan.is-before { rotate: y 7deg; }
+  #plans .plan-track .plan.is-after { rotate: y -7deg; }
+  #plans .plan-track .plan.is-active {
+    opacity: 1; scale: 1; translate: 0 -10px; rotate: y 0deg;
+    box-shadow: 0 34px 64px -20px rgba(0, 0, 0, .8);
+  }
+  #plans .plan-track .plan:hover { translate: 0 0; }
+  #plans .plan-track .plan.is-active:hover { translate: 0 -10px; }
+
+  .plan-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 4px; }
+  .plan-nav-btn {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface2); border: 1px solid var(--rule); color: var(--ink);
+    font-size: 20px; line-height: 1; cursor: pointer; transition: border-color .2s ease, opacity .2s ease;
+  }
+  .plan-nav-btn:hover { border-color: var(--stamp); }
+  .plan-nav-btn:disabled { opacity: .35; cursor: default; }
+  .plan-dots { display: flex; align-items: center; gap: 8px; }
+  .plan-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; background: var(--rule); border: none; cursor: pointer; transition: scale .25s ease, background .25s ease; }
+  .plan-dot.is-active { background: var(--stamp); scale: 1.35; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  #plans .plan-track .plan { scale: 1; opacity: 1; rotate: y 0deg; }
+  #plans .plan-track .plan.is-active { translate: 0; box-shadow: var(--sh2); }
+}
+
 /* ════════════════ FAQ ════════════════ */
 .faq-list { display: grid; gap: 10px; margin-top: 36px; }
 .faq-item { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; transition: border-color .3s ease; }
