@@ -89,39 +89,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="trust-row">
-                <div className="trust-chip">
-                  <div className="icon" aria-hidden="true">
-                    🌐
-                  </div>
-                  <p>
-                    全国
-                    <br />
-                    対応
-                  </p>
-                </div>
-                <div className="trust-chip">
-                  <div className="icon" aria-hidden="true">
-                    🔄
-                  </div>
-                  <p>
-                    継続率
-                    <br />
-                    90%以上
-                  </p>
-                </div>
-                <div className="trust-chip">
-                  <div className="icon" aria-hidden="true">
-                    🛡️
-                  </div>
-                  <p>
-                    安心の
-                    <br />
-                    サポート
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div>
