@@ -863,7 +863,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
      テキスト＋スマホの横並びを維持する（下の 760px クエリ参照）。 */
   .hd-nav { display: none; }
   .hd-cta { display: none; }
-  .mob-ham { display: flex; margin-right: 4px; }
+  /* hd-inner は 1fr auto 1fr の3カラムグリッド。hd-nav/hd-cta が
+     display:none で消えると、明示指定がないハンバーガーは auto
+     （中央）カラムへ自動配置されてロゴのすぐ右に張り付き、右端の
+     1fr 分が空いてヘッダー全体が左寄りに見えていた。右端カラムへ
+     明示的に配置し、右揃えにする。 */
+  .mob-ham { display: flex; grid-column: 3; justify-self: end; margin-right: 4px; }
   .hero-grid { gap: 32px; }
   .phone-mock { width: min(210px, 30vw); }
   .prob-grid, .svc-grid, .plans, .cta-grid, .contact-grid, .svc-list { grid-template-columns: 1fr; }
