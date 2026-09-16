@@ -567,7 +567,10 @@ img { max-width: 100%; display: block; }
     display: flex; gap: 14px; margin-top: 0;
     overflow-x: auto; overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory; scroll-padding-inline: 20vw;
-    padding: 10px 20vw 22px;
+    /* 上のpaddingは「おすすめ」バッジが overflow-x:auto の副作用で
+       overflow-y も auto 扱いになり切れないよう、バッジの突き出し分
+       (top:-14px) + is-active時のtranslate(-10px)を確実に収める値。 */
+    padding: 28px 20vw 22px;
     perspective: 900px;
     -webkit-overflow-scrolling: touch; scrollbar-width: none;
   }
@@ -880,6 +883,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .hero-visual { min-height: 0; padding: 8px 0 4px; }
   .phone-mock { width: min(230px, 62vw); }
+
+  /* ヒーロー内の小さいロゴ行は、縦積みレイアウトだと左だけに寄って
+     右側が不自然に空くため、スマホでは行ごと中央寄せにする。 */
+  .hero-logo-sm { justify-content: center; }
+
+  /* よくある質問：閉じた状態の行が縦に積み重なると場所を取るため、
+     スマホだけ余白・アイコン・文字を一段コンパクトにする。開閉の
+     アニメーション自体は既存の max-height transition をそのまま使う。 */
+  .faq-list { gap: 8px; margin-top: 28px; }
+  .faq-q { padding: 15px 16px; font-size: 14.5px; gap: 8px; }
+  .faq-q::before { min-width: 22px; height: 22px; font-size: 11px; border-radius: 6px; }
+  .faq-q::after { font-size: 17px; }
+  .faq-a { font-size: 13px; padding: 0 16px 0 46px; line-height: 1.75; }
+  .faq-item.open .faq-a { padding: 0 16px 15px 46px; }
+
+  /* LINE相談ボックスの選択肢：縦1列だと4項目分の高さが積み重なるため、
+     2列の配列（グリッド）にしてボックス全体の縦幅を圧縮する。 */
+  .cta-box { padding: 26px 22px; }
+  .line-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .line-opt { padding: 10px 12px; font-size: 12.5px; line-height: 1.5; }
 }
 @media (max-width: 600px) {
   .hero { padding: 56px 0 44px; }
