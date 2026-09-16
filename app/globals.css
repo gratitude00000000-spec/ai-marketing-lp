@@ -889,9 +889,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-visual { min-height: 0; padding: 8px 0 4px; }
   .phone-mock { width: min(230px, 62vw); }
 
-  /* ヒーロー内の小さいロゴ行は、縦積みレイアウトだと左だけに寄って
-     右側が不自然に空くため、スマホでは行ごと中央寄せにする。 */
-  .hero-logo-sm { justify-content: center; }
+  /* ヒーロー内の小さいロゴ行は、ヘッダーの同じロゴと重複して見える
+     ため、スマホでは非表示にする（PCでは2カラムレイアウトのため維持）。 */
+  .hero-logo-sm { display: none; }
 
   /* よくある質問：閉じた状態の行が縦に積み重なると場所を取るため、
      スマホだけ余白・アイコン・文字を一段コンパクトにする。開閉の
