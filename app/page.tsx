@@ -34,6 +34,7 @@ const SERVICES = [
   },
   {
     img: '/images/logo-ai-llmo-aio-aeo-webmarketing-.png',
+    imgFit: 'contain' as const,
     title: 'AIに選ばれるHP',
     short: 'AIに選ばれるHP',
     desc: 'ただのホームページではなく、AIに選ばれる為の対策。',
@@ -223,7 +224,7 @@ export default function HomePage() {
           <div className="svc-grid">
             {SERVICES.map((s) => (
               <div className="svc-card" key={s.title} data-anim="blur">
-                <div className="svc-img">
+                <div className={`svc-img${s.imgFit === 'contain' ? ' is-contain' : ''}`}>
                   <img loading="lazy" src={s.img} alt={s.title} />
                 </div>
                 <div className="svc-body">

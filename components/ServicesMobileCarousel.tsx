@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 
-type Service = { img: string; title: string; short: string; desc: string; points: string[] };
+type Service = {
+  img: string;
+  imgFit?: 'cover' | 'contain';
+  title: string;
+  short: string;
+  desc: string;
+  points: string[];
+};
 
 /**
  * サービス内容セクションのスマホ専用「メインカード＋サムネイル」カルーセル。
@@ -97,7 +104,7 @@ export function ServicesMobileCarousel({ services }: { services: Service[] }) {
                 cardRefs.current[i] = el;
               }}
             >
-              <div className="msvc-img">
+              <div className={`msvc-img${s.imgFit === 'contain' ? ' is-contain' : ''}`}>
                 <img loading="lazy" src={s.img} alt={s.title} />
               </div>
               <div className="msvc-body">
