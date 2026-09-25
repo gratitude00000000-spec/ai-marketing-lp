@@ -1,6 +1,6 @@
 # プロジェクト状況 — AI集客ドットコム（ai-marketing-japan.jp）
 
-**確認日:** 2026-09-10
+**確認日:** 2026-09-25
 **このファイルの役割:** 現在の事実のみを簡潔に記録する。過去の経緯・判断理由は `DECISIONS.md` と Git 履歴を参照。
 **正本ルール:** このファイルは Git 管理された引き継ぎ情報の正本。矛盾時は「本番実測 > Git コード > このファイル」の順で信頼する。
 
@@ -12,8 +12,8 @@
 |---|---|---|
 | 本番 URL | `https://ai-marketing-japan.jp` | 固定 |
 | 稼働中のもの | **Next.js 版（App Router）が本番稼働中** | — |
-| Netlify published deploy | 下記コマンドで確認した値を正とする（記録時点: `6aa2692944f06588af258fe7` / 2026-09-10 08:24 UTC / context production） | `npx netlify api getSite --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46"}'` の `published_deploy.id` |
-| **本番にデプロイされているアプリケーションコードのコミット** | `e45fcd5ec498df58096b6ca72cd2107d6866d9bc`（2026-09-10 の GA4 有効化コミット）。**これは「本番アプリのコミット」であって「現在の `main` の HEAD」ではない** | このファイル（更新は本番デプロイ時のみ） |
+| Netlify published deploy | 下記コマンドで確認した値を正とする（記録時点: `6ab62f006cdd2a7846efb4c4` / 2026-09-25 08:22 UTC / state ready） | `npx netlify api getSite --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46"}'` の `published_deploy.id` |
+| **本番にデプロイされているアプリケーションコードのコミット** | `dfcfb1d2f9dca2c195bfacb01c6c88b484b80ac6`（2026-09-25、`design/stamp-restyle` を `main` にマージ後デプロイ。印章デザインリニューアル一式）。**これは「本番アプリのコミット」であって「現在の `main` の HEAD」ではない**（今後 `main` が進んでも自動では変わらない） | このファイル（更新は本番デプロイ時のみ） |
 | 現在の `main` / `origin/main` の HEAD | **このファイルに固定値で書かない。** セッション開始時に毎回コマンドで確認する | `git rev-parse HEAD` / `git fetch origin && git rev-parse origin/main` |
 | Netlify サイト | `gratitude-lp` / site id `b620e9ab-586b-4b0c-a182-1b7d20e35d46` | 固定 |
 | GitHub 自動デプロイ | **未設定**（`installation_id:false`）。push しても本番は更新されない | — |
