@@ -116,8 +116,8 @@ Git 管理 MD（本ファイル・`docs/PROJECT_STATUS.md`・`docs/DECISIONS.md`
 |---|---|
 | 本番 URL | `https://ai-marketing-japan.jp`（**www なし**） |
 | ホスティング | Netlify。サイト名 `gratitude-lp`、site id `b620e9ab-586b-4b0c-a182-1b7d20e35d46` |
-| デプロイ方式 | **Netlify CLI による手動のみ**。GitHub 自動デプロイは未設定（`installation_id:false`）。push しても本番は更新されない |
-| 本番デプロイコマンド | `npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`（`main` をチェックアウトした状態で実行） |
+| デプロイ方式 | **2026-09-25よりGitHub自動デプロイが有効**（`installation_id: 119774073`）。`origin/main` への push が本番ビルド・デプロイのトリガーになる。push自体はユーザーの明示承認が必要（下記「本番操作」参照）。Netlify CLIでの手動デプロイも引き続き利用可能 |
+| 本番デプロイコマンド（手動デプロイ時） | `npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`（`main` をチェックアウトした状態で実行） |
 | ロールバック先 | 旧静的サイト deploy `6aa1641c214671978323a274`。復旧前に現 published deploy を確認し、ユーザー承認を得てから実行 |
 | DNS | エックスドメイン（Xdomain）管理。A レコード `75.2.60.5`（Netlify）。**A レコードは変更しない** |
 | microCMS | API キーは **GET 専用**（PATCH/DELETE 不可）。値は `.env.local` のみ。SEO グループ内のスラッグ用フィールド ID は `slug` ではなく **`slag`**（スペル誤り）。勝手に `slug` へリネームしない |

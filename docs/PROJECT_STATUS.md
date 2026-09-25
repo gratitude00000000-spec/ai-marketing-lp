@@ -16,15 +16,16 @@
 | **本番にデプロイされているアプリケーションコードのコミット** | `dfcfb1d2f9dca2c195bfacb01c6c88b484b80ac6`（2026-09-25、`design/stamp-restyle` を `main` にマージ後デプロイ。印章デザインリニューアル一式）。**これは「本番アプリのコミット」であって「現在の `main` の HEAD」ではない**（今後 `main` が進んでも自動では変わらない） | このファイル（更新は本番デプロイ時のみ） |
 | 現在の `main` / `origin/main` の HEAD | **このファイルに固定値で書かない。** セッション開始時に毎回コマンドで確認する | `git rev-parse HEAD` / `git fetch origin && git rev-parse origin/main` |
 | Netlify サイト | `gratitude-lp` / site id `b620e9ab-586b-4b0c-a182-1b7d20e35d46` | 固定 |
-| GitHub 自動デプロイ | **未設定**（`installation_id:false`）。push しても本番は更新されない | — |
-| デプロイ方式 | **Netlify CLI による手動デプロイ**（`npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`。`main` チェックアウト状態で実行） | — |
+| GitHub 自動デプロイ | **2026-09-25 有効化**（`installation_id: 119774073`）。`main` ブランチへの push（`origin/main`）が本番ビルド・デプロイのトリガーになる | `npx netlify api getSite --data '{"site_id":"b620e9ab-586b-4b0c-a182-1b7d20e35d46"}'` の `build_settings.installation_id` |
+| デプロイ方式 | **GitHub 自動デプロイ（`origin/main` への push）が主**。Netlify CLI 手動デプロイ（`npx netlify deploy --prod --build --site b620e9ab-586b-4b0c-a182-1b7d20e35d46 --message "..."`）も引き続き利用可能 | — |
 
-> **重要:** このドキュメントや `CLAUDE.md` を `main` にマージすると `main` の HEAD は変わるが、
-> **本番アプリのコード（`e45fcd5`）と published deploy は変わらない**（自動デプロイなしのため）。
-> ドキュメントだけを `main` にマージした場合、`main` の HEAD ≠ 本番アプリのコミット になる。
+> **重要（2026-09-25 GitHub 自動デプロイ有効化により変更）:** これまでは自動デプロイがなく、
+> `main` にマージしても本番は変わらなかったが、現在は **`origin/main` への push が本番デプロイの
+> トリガーになる**。ローカルで `main` にマージしただけ（`origin/main` へ push していない）の段階
+> では、まだ本番アプリのコードは変わらない。**push した瞬間に本番ビルドが走り、成功すれば数分後
+> に published deploy が更新される**ため、push は必ずユーザーの明示承認を得てから行うこと。
 > 「本番に今どのコードが出ているか」を知りたいときは、上表の
 > 「本番にデプロイされているアプリケーションコードのコミット」＋ Netlify API の `published_deploy.id` を見る。
-> `git rev-parse origin/main` の結果を「本番のコード」と誤解しない。
 
 ---
 

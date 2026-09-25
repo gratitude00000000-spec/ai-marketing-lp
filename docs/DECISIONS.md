@@ -159,3 +159,10 @@
 - **確認事項:** デプロイ後、本番HTML（`curl`）で新見出し「AIが見つけ、人が選ぶ」等の反映、`/`・`/about/`・`/contact/` の 200 応答、Netlify API の `published_deploy.id` 更新を確認。
 - **不採用:** 未確定の料金・サービス構成（`docs/PROJECT_STATUS.md` §9「リブランド本編」）を含める案 — 今回は見た目・UI刷新のみで、料金・契約条件は一切変更していない。
 - **将来の注意:** `main` は `origin/main` へは未 push（別途承認が必要、GitHub 自動デプロイは無効のため本番には影響しない）。次回セッションはまず `git status` / `git rev-parse HEAD` / `origin/main` 差分を確認すること。
+
+### D-025 GitHub 自動デプロイを有効化（D-022 を変更）
+- **判断:** ユーザーの明示承認（「自動でお願いしたい」）を受け、Netlify GitHub App をこのリポジトリ（`gratitude00000000-spec/ai-marketing-lp`）に連携し、`origin/main` への push を本番ビルド・デプロイのトリガーにした。Netlifyダッシュボードの「Link repository」ウィザードから再連携し、Build command `npm run build` を確認のうえ実行。連携後 `npx netlify api getSite` で `build_settings.installation_id: 119774073` を確認済み。
+- **経緯:** ユーザーが「自動でいつもデプロイしてるはずです」と発言したため実測したところ、実際は `installation_id: null` で自動デプロイは一度も動いていなかった（過去のデプロイ履歴は全て手動CLIの`--message`文言と一致）。GitHub側のNetlify App自体は「すべてのリポジトリ」に既にアクセス許可済みだったが、サイト側（Netlify）とこのリポジトリの連携（`installation_id`）が未設定だった。
+- **理由:** D-022時点では手動運用のメリット（デプロイタイミングの制御）を優先したが、ユーザーが自動デプロイを希望したため方針を変更。
+- **不採用:** 手動デプロイのみを維持する案（D-022の元の判断）。
+- **将来の注意:** **これ以降、`origin/main` への push は即座に本番ビルド・デプロイを引き起こす。** push は必ずユーザーの明示承認を得てから行うこと（`CLAUDE.md`「本番操作」の対象のまま）。Netlify CLIでの手動デプロイ（`netlify deploy --prod`）も引き続き使えるが、通常は push 経由の自動デプロイが主になる。ダッシュボードの「Link repository」ウィザードで Publish directory が `.`（netlify.toml未考慮時のデフォルト）と表示されたが、リポジトリに `netlify.toml`（`publish = ".next"`）がある場合はそちらが優先される前提で進めた — 次回、自動デプロイ後の本番表示に異常がないか必ず確認すること。
