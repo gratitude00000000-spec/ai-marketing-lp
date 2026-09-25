@@ -67,7 +67,7 @@ export default async function BlogListPage() {
               {contents.map((b) => {
                 const slug = blogSlug(b);
                 return (
-                  <Link href={`/blog/${slug}/`} className="blog-card" key={b.id}>
+                  <Link href={`/blog/${slug}/`} className="blog-card" key={b.id} data-anim="blur">
                     {b.eyecatch ? (
                       // eslint-disable-next-line jsx-a11y/alt-text
                       <img className="blog-thumb" src={b.eyecatch.url} alt={b.title} loading="lazy" />

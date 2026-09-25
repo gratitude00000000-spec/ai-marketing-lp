@@ -126,10 +126,33 @@ export default function AboutPage() {
                 <th>事業内容</th>
                 <td>
                   <ul>
-                    <li>飲食事業・パーティー会場運営</li>
-                    <li>グルメサイト運営</li>
-                    <li>Webマーケティング（AI集客・SEO・MEO・GBP運用代行）</li>
-                    <li>人材採用コンサルティング</li>
+                    <li>
+                      WEBマーケティング全般（
+                      <Link href="/">AI集客ドットコム</Link>
+                      ・HP制作
+                      <a href="https://hp.ai-marketing-japan.jp/" target="_blank" rel="noopener noreferrer">
+                        AI DRIVE
+                      </a>
+                      ）
+                    </li>
+                    <li>
+                      グルメサイト運営（
+                      <a href="https://www.okinawa-party-yarou.com/" target="_blank" rel="noopener noreferrer">
+                        ぱーてぃー野朗
+                      </a>
+                      ）
+                    </li>
+                    <li>
+                      飲食事業・パーティー会場運営（
+                      <a href="https://partyspace-next-naha.com/" target="_blank" rel="noopener noreferrer">
+                        PARTYSPACE NEXT
+                      </a>
+                      ・
+                      <a href="https://partyspace-next2-okinawacity.com/" target="_blank" rel="noopener noreferrer">
+                        PARTYSPACE NEXTⅡ 沖縄市
+                      </a>
+                      ）
+                    </li>
                   </ul>
                 </td>
               </tr>
@@ -153,7 +176,7 @@ export default function AboutPage() {
             <h2 className="sec-h2">提供サービス</h2>
             <div className="svc-list">
               {SERVICES.map((s) => (
-                <div className="svc-item" key={s.title}>
+                <div className="svc-item" key={s.title} data-anim="blur">
                   <div className="svc-icon" aria-hidden="true">
                     {s.icon}
                   </div>
