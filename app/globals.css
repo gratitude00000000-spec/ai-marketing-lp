@@ -140,7 +140,7 @@ img { max-width: 100%; display: block; }
 .hero-logo-by { font-size: 10px; color: var(--muted); }
 .hero h1 { font-size: clamp(28px, 4vw, 50px); font-weight: 800; line-height: 1.28; margin: 14px 0 18px; color: var(--ink-strong); }
 .hero h1 .ac { color: var(--stamp-lt); }
-.hero h1 .brand { color: var(--paper); text-shadow: 0 0 26px rgba(213, 67, 42, .45); }
+.hero h1 .brand { color: #FFE033; text-shadow: 0 0 26px rgba(255, 224, 51, .4); }
 .hero h1 .nowrap { white-space: nowrap; }
 /* 見出し最終行を幅いっぱいのflexにし、ロボットを行の右端まで離して置く
    ことで、テキストに寄り過ぎず見出しブロック全体とバランスを取る。 */

@@ -177,9 +177,6 @@ export default function AboutPage() {
             <div className="svc-list">
               {SERVICES.map((s) => (
                 <div className="svc-item" key={s.title} data-anim="blur">
-                  <div className="svc-icon" aria-hidden="true">
-                    {s.icon}
-                  </div>
                   <div>
                     <h3>{s.title}</h3>
                     <p>{s.desc}</p>
