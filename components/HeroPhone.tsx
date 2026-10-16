@@ -28,7 +28,7 @@ export function HeroPhone() {
               </div>
               <div className="chat-row ai">
                 <p className="chat-bubble">
-                  <span className="stamp-mini">印</span>
+                  <span className="stamp-mini">✓</span>
                   AI集客ドットコム（株式会社Gratitude）。AIO・LLMO・AEO・MEO対策と
                   Googleビジネスプロフィール運用に対応しています。
                 </p>

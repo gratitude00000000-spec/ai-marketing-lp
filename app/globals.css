@@ -537,7 +537,7 @@ img { max-width: 100%; display: block; }
 .plan-desc { font-size: 13px; color: var(--paper-muted); margin-bottom: 16px; min-height: 42px; line-height: 1.6; }
 .plan-feats { display: grid; gap: 8px; }
 .plan-feats li { font-size: 13px; padding-left: 22px; position: relative; list-style: none; color: var(--paper-ink); line-height: 1.5; }
-.plan-feats li::before { content: '印'; position: absolute; left: 0; top: 0; color: var(--stamp); font-size: 10px; font-family: "Shippori Mincho", serif; }
+.plan-feats li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--stamp); font-size: 11px; font-family: "Noto Sans JP", sans-serif; font-weight: 700; }
 .plan-feats li.hl { color: var(--stamp-deep); font-weight: 700; }
 .plan-feats li.hl::before { color: var(--stamp-deep); }
 .plan-note { margin-top: 20px; padding: 12px 16px; background: rgba(213, 67, 42, .08); border-left: 3px solid var(--stamp); border-radius: 6px; font-size: 13px; color: var(--ink); line-height: 1.6; }
@@ -750,7 +750,7 @@ img { max-width: 100%; display: block; }
 .about-table tr:first-child { border-top: 1px solid var(--rule); }
 .about-table th { font-size: 14px; font-weight: 700; color: var(--stamp-lt); padding: 20px 16px 20px 0; vertical-align: top; width: 180px; min-width: 140px; text-align: left; }
 .about-table td { font-size: 15px; color: var(--ink); padding: 20px 0; line-height: 1.75; word-break: keep-all; overflow-wrap: break-word; }
-.about-table td a { color: var(--stamp-lt); text-decoration: underline; white-space: nowrap; }
+.about-table td a { color: var(--stamp-lt); text-decoration: underline; white-space: nowrap; overflow-wrap: break-word; word-break: break-all; }
 .about-table ul { padding-left: 20px; display: grid; gap: 6px; }
 .mission-box { background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; padding: 52px 48px; color: var(--ink); margin-top: 56px; position: relative; overflow: hidden; }
 .mission-box::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 85% 15%, rgba(213, 67, 42, .16), transparent 60%); }
@@ -923,6 +923,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .hero { padding: 56px 0 44px; }
   .blog-grid { grid-template-columns: 1fr; }
   .trust-row { grid-template-columns: 1fr 1fr; }
+  /* 会社概要テーブル：横幅が足りないためブロック表示に切り替え */
+  .about-table,
+  .about-table tbody,
+  .about-table tr,
+  .about-table th,
+  .about-table td { display: block; width: 100%; }
+  .about-table tr { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .about-table tr:first-child { border-top: 1px solid var(--rule); }
+  .about-table th { padding: 0 0 4px; font-size: 12px; color: var(--stamp-lt); border: none; }
+  .about-table td { padding: 0; font-size: 14px; }
+  .about-table td a { white-space: normal; word-break: break-all; }
   /* スマホでは周辺の浮遊要素を出さない（本体の可読性を優先） */
   .orbit-tag, .status-chip { display: none; }
   .phone-mock { width: min(186px, 54vw); }

@@ -46,6 +46,11 @@ export function ScrollFx() {
       if (document.visibilityState === 'hidden') revealAll();
     };
     document.addEventListener('visibilitychange', onVisibility);
+    // bfcache から戻ったとき（ブラウザ「戻る」）: JS-anim が残ったまま IO が再発火しないため全表示
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) revealAll();
+    };
+    window.addEventListener('pageshow', onPageShow);
 
     // 画面外に出た装飾アニメーション（ヒーロー・帯）は止めて負荷を抑える
     const loopHosts = Array.from(
@@ -101,6 +106,7 @@ export function ScrollFx() {
       loopIo?.disconnect();
       window.clearTimeout(timer);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pageshow', onPageShow);
       if (stage) {
         if (onMove) stage.removeEventListener('mousemove', onMove);
         if (onLeave) stage.removeEventListener('mouseleave', onLeave);
