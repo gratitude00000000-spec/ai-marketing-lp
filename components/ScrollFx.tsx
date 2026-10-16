@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 /**
  * スクロール演出のプログレッシブ・エンハンスメント。
@@ -10,15 +11,22 @@ import { useEffect } from 'react';
  *   JS が使える環境でだけ html に .js-anim を付け、いったん隠してから見せる。
  *   → JS 無効・クローラ・バックグラウンドタブでも本文が必ず読める。
  * - prefers-reduced-motion: reduce では一切適用しない。
- * - 保険として 1400ms 後と visibilitychange(hidden) で強制的に表示する
- *   （IntersectionObserver が発火しない描画コンテキスト対策）。
+ * - layout.tsx に置かれアンマウントされないため、usePathname の変化を
+ *   useEffect の依存配列に入れ、ページ遷移のたびに再セットアップする。
  */
 export function ScrollFx() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce || !('IntersectionObserver' in window)) return;
 
     const root = document.documentElement;
+
+    // 前ページの is-in をリセットしてから再取得
+    root.classList.remove('js-anim');
+    document.querySelectorAll<HTMLElement>('[data-anim]').forEach((el) => el.classList.remove('is-in'));
+
     const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-anim]'));
     if (targets.length === 0) return;
 
@@ -46,7 +54,7 @@ export function ScrollFx() {
       if (document.visibilityState === 'hidden') revealAll();
     };
     document.addEventListener('visibilitychange', onVisibility);
-    // bfcache から戻ったとき（ブラウザ「戻る」）: JS-anim が残ったまま IO が再発火しないため全表示
+    // bfcache から戻ったとき（ブラウザ「戻る」）
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) revealAll();
     };
@@ -123,7 +131,7 @@ export function ScrollFx() {
         }
       }
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
