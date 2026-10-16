@@ -41,7 +41,7 @@ export function ScrollFx() {
 
     // 保険：描画コンテキストによっては IO が発火しないため、必ず最終状態にする
     const revealAll = () => targets.forEach(reveal);
-    const timer = window.setTimeout(revealAll, 1400);
+    const timer = window.setTimeout(revealAll, 300);
     const onVisibility = () => {
       if (document.visibilityState === 'hidden') revealAll();
     };
@@ -102,6 +102,12 @@ export function ScrollFx() {
     }
 
     return () => {
+      // ページ離脱時に js-anim / is-in をリセットする。
+      // これをしないと Next.js のクライアントナビゲーションで
+      // <html> に js-anim が残ったまま次のページへ引き継がれ、
+      // 戻ったときに IO がスクロール済み要素を検知できず非表示になる。
+      root.classList.remove('js-anim');
+      targets.forEach((el) => el.classList.remove('is-in'));
       io.disconnect();
       loopIo?.disconnect();
       window.clearTimeout(timer);
